@@ -14,7 +14,7 @@ struct ContentView: View {
             Button(action: {
                         print("Button Tapped!")
                     }) {
-                        Text("Get started")
+                        Text("Button")
                             .font(.system(size: 22, weight: .bold))
                             .foregroundColor(.black) // Match text to border
                             .padding(.vertical, 10)
