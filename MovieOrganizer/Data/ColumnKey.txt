@@ -1,0 +1,13 @@
+A       Action
+B       don’t know what I had planned for that
+C       Comedy
+D       Drama
+F        Fantasy/Fitness
+H       Horror
+L        LDS
+M      Musical
+R       Romance
+S        Sci-Fi
+HA     Halloween
+TH     Thanksgiving
+CM    Christmas

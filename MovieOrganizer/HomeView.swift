@@ -23,8 +23,10 @@ struct HomeView: View {
                 HStack {
                     HStack {
                         Text("Video Library")
-                            .font(.custom("PTSans-Narrow", size: 50))
-                            .foregroundStyle(.black)
+                            .font(.custom("Poppins-Bold", size: 35))
+                            .foregroundStyle(.white)
+                            .shadow(color: Color.black.opacity(0.9), radius: 3, x: 4, y: 3)
+
                         Spacer()
                         VStack {
                             Button(action: {
@@ -73,6 +75,7 @@ struct HomeView: View {
                                     .smooth(duration: 0.6, extraBounce: 0.4)
                                 ) {
                                     showShuffle.toggle()
+                                    randomGenre = ""
                                 }
                             }) {
                                 Image(
@@ -88,191 +91,6 @@ struct HomeView: View {
                         .frame(width: 50, height: 50)
                         .background(.seafoamBlue)
                         .cornerRadius(15)
-                        .overlay(alignment: .bottomTrailing) {
-                            if showShuffle {
-                                VStack {
-                                    VStack {
-                                        HStack {
-                                            Text("Randomizer")
-                                                .font(.custom("PTSans-Narrow", size: 40))
-                                                .foregroundStyle(.yellowTheme)
-                                            Spacer()
-                                        }
-                                        .padding(.top, 10)
-                                        HStack {
-                                            Button {
-                                                showRandomlyChosenMovie = true
-                                            } label: {
-                                                Text("Random Movie")
-                                                    .font(.custom("PTSans-Narrow", size: 20))
-                                                    .padding(.vertical, 5)
-                                                    .padding(.horizontal, 10)
-                                                    .foregroundStyle(.black)
-                                                
-                                            }
-                                            
-                                            .background(
-                                                // --- Top Layer: The button itself ---
-                                                RoundedRectangle(cornerRadius: 15)
-                                                    .fill(.blueButtonTheme)
-                                                    .overlay(
-                                                        // Add the thin black border
-                                                        RoundedRectangle(cornerRadius: 15)
-                                                            .stroke(.black, lineWidth: 2)
-                                                    )
-                                            )
-                                            .background(
-                                                ZStack {
-                                                    RoundedRectangle(cornerRadius: 15)
-                                                        .fill(.black)
-                                                }
-                                                // The magic offsets:
-                                                    .offset(x: 0, y: 4)  // Slightly right, heavily down
-                                                    .scaleEffect(x: 0.99, y: 1.0)
-                                            )
-                                            Text("- OR -")
-                                                .font(.custom("PTSans-Narrow", size: 20))
-                                                .foregroundStyle(.white)
-                                                .padding(.horizontal, 10)
-                                            Button {
-                                                randomGenre = "Christmas"
-                                            } label: {
-                                                Text("Random Genre")
-                                                    .font(.custom("PTSans-Narrow", size: 20))
-                                                    .padding(.vertical, 5)
-                                                    .padding(.horizontal, 10)
-                                                    .foregroundStyle(.black)
-                                                
-                                            }
-                                            
-                                            .background(
-                                                // --- Top Layer: The button itself ---
-                                                RoundedRectangle(cornerRadius: 15)
-                                                    .fill(.blueButtonTheme)
-                                                    .overlay(
-                                                        // Add the thin black border
-                                                        RoundedRectangle(cornerRadius: 15)
-                                                            .stroke(.black, lineWidth: 2)
-                                                    )
-                                            )
-                                            .background(
-                                                ZStack {
-                                                    RoundedRectangle(cornerRadius: 15)
-                                                        .fill(.black)
-                                                }
-                                                // The magic offsets:
-                                                    .offset(x: 0, y: 4)  // Slightly right, heavily down
-                                                    .scaleEffect(x: 0.99, y: 1.0)
-                                            )
-                                            Spacer()
-                                        }
-                                        
-                                        if randomGenre != "" {
-                                            Divider()
-                                                .overlay(.white)
-                                                .padding(.trailing, 20)
-                                                .padding(.vertical, 20)
-                                            
-                                            
-                                            HStack {
-                                                Text(randomGenre)
-                                                    .font(.custom("PTSans-Narrow", size: 30))
-                                                    .foregroundStyle(.yellowTheme)
-                                                Spacer()
-                                            }
-                                            
-                                            HStack {
-                                                VStack {
-                                                    
-                                                }
-                                                .frame(width: 300, height: 200)
-                                                .border(.white)
-                                                Spacer()
-                                            }
-                                            HStack {
-                                                Button {
-                                                    //randomGenre = "Christmas"
-                                                } label: {
-                                                    Text("Random From List")
-                                                        .font(.custom("PTSans-Narrow", size: 20))
-                                                        .padding(.vertical, 5)
-                                                        .padding(.horizontal, 10)
-                                                        .foregroundStyle(.black)
-                                                }
-                                                .background(
-                                                    // --- Top Layer: The button itself ---
-                                                    RoundedRectangle(cornerRadius: 15)
-                                                        .fill(.blueButtonTheme)
-                                                        .overlay(
-                                                            // Add the thin black border
-                                                            RoundedRectangle(cornerRadius: 15)
-                                                                .stroke(.black, lineWidth: 2)
-                                                        )
-                                                )
-                                                .background(
-                                                    ZStack {
-                                                        RoundedRectangle(cornerRadius: 15)
-                                                            .fill(.black)
-                                                    }
-                                                    // The magic offsets:
-                                                        .offset(x: 0, y: 4)  // Slightly right, heavily down
-                                                        .scaleEffect(x: 0.99, y: 1.0)
-                                                )
-                                                .padding(.top, 10)
-                                                Spacer()
-                                            }
-                                        }
-                                        
-                                                                                
-                                        Spacer()
-                                    }
-                                    .padding(.leading, 20)
-                                }
-                                .frame(width: 350, height: randomGenre != "" ? 560 : 300)
-                                .cornerRadius(15)
-                                .background(
-                                   // --- Top Layer: The button itself ---
-                                   RoundedRectangle(cornerRadius: 20)
-                                       .fill(.blueTheme)
-                                       .overlay(
-                                           // Add the thin black border
-                                           RoundedRectangle(cornerRadius: 20)
-                                               .stroke(.black, lineWidth: 2)
-                                       )
-                               )
-                               .background(
-                                   ZStack {
-                                       RoundedRectangle(cornerRadius: 20)
-                                           .fill(.black)
-                                   }
-                                   // The magic offsets:
-                                   .offset(x: 0, y: 4) // Slightly right, heavily down
-                                   .scaleEffect(x: 0.99, y: 1.0)
-                               )
-                              
-                                .offset(y: randomGenre != "" ? 570 : 310)
-                            }
-                        }
-                        .background(
-                            // --- Top Layer: The button itself ---
-                            RoundedRectangle(cornerRadius: 15)
-                                .fill(.blueTheme)
-                                .overlay(
-                                    // Add the thin black border
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .stroke(.black, lineWidth: 2)
-                                )
-                        )
-                        .background(
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 15)
-                                    .fill(.black)
-                            }
-                            // The magic offsets:
-                            .offset(x: 0, y: 4)  // Slightly right, heavily down
-                            .scaleEffect(x: 0.99, y: 1.0)
-                        )
-
                     }
                     // width
                     .containerRelativeFrame(.horizontal) { length, axis in
@@ -284,6 +102,10 @@ struct HomeView: View {
 
                 // MAIN VIEW
                 VStack {
+                    if tab == "chart" {
+                        DataView()
+                    }
+                
                 }
                 // width
                 .containerRelativeFrame(.horizontal) { length, axis in
@@ -293,6 +115,190 @@ struct HomeView: View {
                 .containerRelativeFrame(.vertical) { length, axis in
                     return length * 0.84
                 }
+                .overlay(alignment: .topTrailing) {
+                    if showShuffle {
+                        VStack {
+                            VStack {
+                                HStack {
+                                    Text("Randomizer")
+                                        .font(.custom("PTSans-Narrow", size: 40))
+                                        .foregroundStyle(.yellowTheme)
+                                    Spacer()
+                                }
+                                .padding(.top, 10)
+                                HStack {
+                                    Button {
+                                        showRandomlyChosenMovie = true
+                                    } label: {
+                                        Text("Random Movie")
+                                            .font(.custom("PTSans-Narrow", size: 20))
+                                            .padding(.vertical, 5)
+                                            .padding(.horizontal, 10)
+                                            .foregroundStyle(.black)
+                                        
+                                    }
+                                    
+                                    .background(
+                                        // --- Top Layer: The button itself ---
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .fill(.blueButtonTheme)
+                                            .overlay(
+                                                // Add the thin black border
+                                                RoundedRectangle(cornerRadius: 15)
+                                                    .stroke(.black, lineWidth: 2)
+                                            )
+                                    )
+                                    .background(
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .fill(.black)
+                                        }
+                                        // The magic offsets:
+                                            .offset(x: 0, y: 4)  // Slightly right, heavily down
+                                            .scaleEffect(x: 0.99, y: 1.0)
+                                    )
+                                    Text("- OR -")
+                                        .font(.custom("PTSans-Narrow", size: 20))
+                                        .foregroundStyle(.white)
+                                        .padding(.horizontal, 10)
+                                    Button {
+                                        randomGenre = "Christmas"
+                                    } label: {
+                                        Text("Random Genre")
+                                            .font(.custom("PTSans-Narrow", size: 20))
+                                            .padding(.vertical, 5)
+                                            .padding(.horizontal, 10)
+                                            .foregroundStyle(.black)
+                                        
+                                    }
+                                    
+                                    .background(
+                                        // --- Top Layer: The button itself ---
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .fill(.blueButtonTheme)
+                                            .overlay(
+                                                // Add the thin black border
+                                                RoundedRectangle(cornerRadius: 15)
+                                                    .stroke(.black, lineWidth: 2)
+                                            )
+                                    )
+                                    .background(
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .fill(.black)
+                                        }
+                                        // The magic offsets:
+                                            .offset(x: 0, y: 4)  // Slightly right, heavily down
+                                            .scaleEffect(x: 0.99, y: 1.0)
+                                    )
+                                    Spacer()
+                                }
+                                
+                                if randomGenre != "" {
+                                    Divider()
+                                        .overlay(.white)
+                                        .padding(.trailing, 20)
+                                        .padding(.vertical, 20)
+                                    
+                                    
+                                    HStack {
+                                        Text(randomGenre)
+                                            .font(.custom("PTSans-Narrow", size: 30))
+                                            .foregroundStyle(.yellowTheme)
+                                        Spacer()
+                                    }
+                                    
+                                    HStack {
+                                        VStack {
+                                            
+                                        }
+                                        .frame(width: 300, height: 200)
+                                        .border(.white)
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Button {
+                                            //randomGenre = "Christmas"
+                                        } label: {
+                                            Text("Random From List")
+                                                .font(.custom("PTSans-Narrow", size: 20))
+                                                .padding(.vertical, 5)
+                                                .padding(.horizontal, 10)
+                                                .foregroundStyle(.black)
+                                        }
+                                        .background(
+                                            // --- Top Layer: The button itself ---
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .fill(.blueButtonTheme)
+                                                .overlay(
+                                                    // Add the thin black border
+                                                    RoundedRectangle(cornerRadius: 15)
+                                                        .stroke(.black, lineWidth: 2)
+                                                )
+                                        )
+                                        .background(
+                                            ZStack {
+                                                RoundedRectangle(cornerRadius: 15)
+                                                    .fill(.black)
+                                            }
+                                            // The magic offsets:
+                                                .offset(x: 0, y: 4)  // Slightly right, heavily down
+                                                .scaleEffect(x: 0.99, y: 1.0)
+                                        )
+                                        .padding(.top, 10)
+                                        Spacer()
+                                    }
+                                }
+                                
+                                                                        
+                                Spacer()
+                            }
+                            .padding(.leading, 20)
+                        }
+                        .frame(width: 350, height: randomGenre != "" ? 560 : 300)
+                        .cornerRadius(15)
+                        .background(
+                           // --- Top Layer: The button itself ---
+                           RoundedRectangle(cornerRadius: 20)
+                               .fill(.blueTheme)
+                               .overlay(
+                                   // Add the thin black border
+                                   RoundedRectangle(cornerRadius: 20)
+                                       .stroke(.black, lineWidth: 2)
+                               )
+                       )
+                       .background(
+                           ZStack {
+                               RoundedRectangle(cornerRadius: 20)
+                                   .fill(.black)
+                           }
+                           // The magic offsets:
+                           .offset(x: 0, y: 4) // Slightly right, heavily down
+                           .scaleEffect(x: 0.99, y: 1.0)
+                       )
+                      
+                        .offset(y: randomGenre != "" ? -5 : -5)
+                    }
+                }
+//                .background(
+//                    // --- Top Layer: The button itself ---
+//                    RoundedRectangle(cornerRadius: 15)
+//                        .fill(.red.opacity(0.1))
+//                        .overlay(
+//                            // Add the thin black border
+//                            RoundedRectangle(cornerRadius: 15)
+//                                .stroke(.black, lineWidth: 2)
+//                        )
+//                )
+//                .background(
+//                    ZStack {
+//                        RoundedRectangle(cornerRadius: 15)
+//                            .fill(.black)
+//                    }
+//                    // The magic offsets:
+//                    .offset(x: 0, y: 4)  // Slightly right, heavily down
+//                    .scaleEffect(x: 0.99, y: 1.0)
+//                )
      //           .border(.white)
                // .padding(.top, 20)
 
@@ -378,16 +384,16 @@ struct HomeView: View {
                                 withAnimation(
                                     .smooth(duration: 0.3, extraBounce: 0.4)
                                 ) {
-                                    tab = "download"
+                                    tab = "history"
                                     xOffset = 25
                                 }
                             }) {
-                                if tab == "download" {
-                                    Image(systemName: "arrow.down.to.line")
+                                if tab == "history" {
+                                    Image(systemName: "clock.arrow.trianglehead.clockwise.rotate.90.path.dotted")
                                         .font(.system(size: 20))
                                         .foregroundStyle(.yellowTheme)
                                 } else {
-                                    Image(systemName: "arrow.down.to.line")
+                                    Image(systemName: "clock.arrow.trianglehead.clockwise.rotate.90.path.dotted")
                                         .font(.system(size: 20))
                                         .foregroundStyle(.yellowTheme)
                                 }
