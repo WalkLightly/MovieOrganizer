@@ -11,3 +11,24 @@ S        Sci-Fi
 HA     Halloween
 TH     Thanksgiving
 CM    Christmas
+
+
+folders:
+A
+M
+R
+N
+I
+H
+G
+L
+E
+S
+C
+B
+TH
+F
+P
+Q
+D
+HA

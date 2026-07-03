@@ -91,6 +91,25 @@ struct HomeView: View {
                         .frame(width: 50, height: 50)
                         .background(.seafoamBlue)
                         .cornerRadius(15)
+                        .background(
+                            // --- Top Layer: The button itself ---
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(.blueTheme)
+                                .overlay(
+                                    // Add the thin black border
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .stroke(.black, lineWidth: 2)
+                                )
+                        )
+                        .background(
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(.black)
+                            }
+                            // The magic offsets:
+                            .offset(x: 0, y: 4)  // Slightly right, heavily down
+                            .scaleEffect(x: 0.99, y: 1.0)
+                        )
                     }
                     // width
                     .containerRelativeFrame(.horizontal) { length, axis in
