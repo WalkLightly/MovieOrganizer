@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DataView: View {
-    @State private var isShowingSheet : Bool = false
+    @State private var isShowingSheet : Bool = true
 
     var body: some View {
         VStack {
@@ -89,9 +89,10 @@ struct DataView: View {
                                     //  .frame(width: 175, alignment: .leading)
                                     .frame(width: 140, alignment: .leading)
                             }
-                            .padding(.leading, 10).onTapGesture {
+                            .padding(.leading, 10)
+                            .onTapGesture {
                                 //  previewBooks = viewModel.authors[1].books
-                                // isShowingSheet = true
+                                isShowingSheet = true
                             }
                             Spacer()
                         }
@@ -110,9 +111,10 @@ struct DataView: View {
 
                             }
                             //.frame(width: 175)
-                            .padding(.leading, 10).onTapGesture {
+                            .padding(.leading, 10)
+                            .onTapGesture {
                                 // previewBooks = viewModel.authors[2].books
-                                // isShowingSheet = true
+                                isShowingSheet = true
                             }
                             Spacer()
                         }
@@ -138,7 +140,7 @@ struct DataView: View {
                             .padding(.leading, 10)
                             .onTapGesture {
                                 //  previewBooks = viewModel.authors[3].books
-                                //   isShowingSheet = true
+                                isShowingSheet = true
                             }
                             Spacer()
                         }
@@ -155,9 +157,10 @@ struct DataView: View {
                                     .frame(width: 140, alignment: .leading)
 
                             }
-                            .padding(.leading, 10).onTapGesture {
+                            .padding(.leading, 10)
+                            .onTapGesture {
                                 //  previewBooks = viewModel.authors[4].books
-                                //   isShowingSheet = true
+                                isShowingSheet = true
                             }
                             Spacer()
                         }
@@ -252,6 +255,7 @@ struct DataView: View {
                         .foregroundStyle(.white)
                         .frame(width: 400, alignment: .leading)
                         .padding(.bottom, 15)
+                        .padding(.leading, 15)
                         
                 }
             }

@@ -96,25 +96,32 @@ struct SettingsView: View {
                                                 .padding(.vertical, 5)
                                                 .focused($isTextFieldFocused)
 
-                                        }.frame(width: 170)
-                                            .background(.blueTheme)
-                                            .cornerRadius(10)
+                                        }
+                                        .frame(width: 170)
+                                        .background(.blueTheme)
+                                        .cornerRadius(10)
 
                                     } else {
-                                        Text(folder.name)
-                                            .font(
-                                                .custom(
-                                                    "PTSans-Narrow",
-                                                    size: 40
+                                        HStack {
+                                            Text(folder.name)
+                                                .font(
+                                                    .custom(
+                                                        "PTSans-Narrow",
+                                                        size: 40
+                                                    )
                                                 )
-                                            )
-                                            .foregroundStyle(.white)
-                                            .padding(.leading, 10)
-                                            .onTapGesture {
-                                                editingId = folder.id
-                                                newFolderName = folder.name
-                                                isTextFieldFocused = true
-                                            }
+                                                .foregroundStyle(.white)
+                                                .padding(.leading, 10)
+                                                
+                                                
+                                            Spacer()
+                                        }
+                                        .frame(width: 170)
+                                        .onTapGesture {
+                                            editingId = folder.id
+                                            newFolderName = folder.name
+                                            isTextFieldFocused = true
+                                        }
                                     }
                                     Spacer()
                                     HStack {
@@ -138,9 +145,25 @@ struct SettingsView: View {
                                                         )
                                                         .padding(.vertical, 5)
                                                 }
-                                                .frame(width: 80)
-                                                .background(.yellow)
+                                                .frame(width: 80, height: 60)
+                                                .background(.yellowTheme)
                                                 .cornerRadius(10)
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .fill(.seafoamBlue)
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(.black, lineWidth: 2)
+                                                        )
+                                                )
+                                                .background(
+                                                    ZStack {
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(.black)
+                                                    }
+                                                    .offset(x: 0, y: 3)
+                                                    .scaleEffect(x: 1.0, y: 1.0)
+                                                )
 
                                                 Button {
 
@@ -159,9 +182,25 @@ struct SettingsView: View {
                                                         )
                                                         .padding(.vertical, 5)
                                                 }
-                                                .frame(width: 60)
+                                                .frame(width: 60, height: 60)
                                                 .background(.seafoamBlue)
                                                 .cornerRadius(10)
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .fill(.seafoamBlue)
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(.black, lineWidth: 2)
+                                                        )
+                                                )
+                                                .background(
+                                                    ZStack {
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(.black)
+                                                    }
+                                                    .offset(x: 0, y: 3)
+                                                    .scaleEffect(x: 1.0, y: 1.0)
+                                                )
 
                                             }
                                             .padding(.trailing, 70)
@@ -176,6 +215,7 @@ struct SettingsView: View {
                                                     )
 
                                             }
+                                            .shadow(color: Color.black.opacity(0.4), radius: 1, x: 2, y: 3)
                                         }
                                     }
                                     .frame(width: 80)
@@ -336,9 +376,25 @@ struct SettingsView: View {
                                                         )
                                                         .padding(.vertical, 5)
                                                 }
-                                                .frame(width: 80)
-                                                .background(.yellow)
+                                                .frame(width: 80, height: 50)
+                                                .background(.yellowTheme)
                                                 .cornerRadius(10)
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .fill(.yellowTheme)
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(.black, lineWidth: 2)
+                                                        )
+                                                )
+                                                .background(
+                                                    ZStack {
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(.black)
+                                                    }
+                                                    .offset(x: 0, y: 3)
+                                                    .scaleEffect(x: 1.0, y: 1.0)
+                                                )
 
                                                 Button {
 
@@ -357,9 +413,25 @@ struct SettingsView: View {
                                                         )
                                                         .padding(.vertical, 5)
                                                 }
-                                                .frame(width: 80)
+                                                .frame(width: 80, height: 50)
                                                 .background(.seafoamBlue)
                                                 .cornerRadius(10)
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .fill(.seafoamBlue)
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(.black, lineWidth: 2)
+                                                        )
+                                                )
+                                                .background(
+                                                    ZStack {
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(.black)
+                                                    }
+                                                    .offset(x: 0, y: 3)
+                                                    .scaleEffect(x: 1.0, y: 1.0)
+                                                )
 
                                             }
                                             //.padding(.trailing, 70)
@@ -374,6 +446,8 @@ struct SettingsView: View {
                                                     )
 
                                             }
+                                            .shadow(color: Color.black.opacity(0.4), radius: 1, x: 2, y: 3)
+
                                         }
                                     }
                                     .frame(width: 80)

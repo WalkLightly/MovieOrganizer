@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var tab: String = "settings"
+    @State private var tab: String = "home"
     @State private var xOffset = -150
     @State private var showShuffle: Bool = false
     @State private var randomGenre: String = ""
@@ -39,7 +39,7 @@ struct HomeView: View {
                             }) {
                                 Image(
                                     systemName:
-                                        "arrow.trianglehead.2.clockwise.rotate.90"
+                                        "arrow.trianglehead.2.clockwise.rotate.90.icloud.fill"
                                 )
                                 .font(.system(size: 20))
                                 .foregroundStyle(.blueTheme)
