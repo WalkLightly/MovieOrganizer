@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct DataView: View {
+    @State private var isShowingSheet : Bool = false
+
     var body: some View {
         VStack {
             ScrollView {
@@ -30,7 +32,7 @@ struct DataView: View {
                     HStack {
                         Spacer()
                         Button {
-
+                            isShowingSheet = true
                         } label: {
                             Text("View More")
                                 .font(.custom("PTSans-Narrow", size: 25))
@@ -237,6 +239,26 @@ struct DataView: View {
             .offset(x: 0, y: 4)
             .scaleEffect(x: 0.99, y: 1.0)
         )
+        .onAppear {
+            isShowingSheet = false
+        }
+        .sheet(isPresented: $isShowingSheet)
+        {
+            [isShowingSheet] in
+            ScrollView {
+                ForEach(genres, id: \.self) { genre in
+                    Text("\(genre.name)")
+                        .font(.custom("PTSans-Narrow", size: 25))
+                        .foregroundStyle(.white)
+                        .frame(width: 400, alignment: .leading)
+                        .padding(.bottom, 15)
+                        
+                }
+            }
+            .presentationDetents([.height(500)])
+            .padding(.top, 20)
+            .padding(.leading, 20)
+        }
     }
 }
 
