@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var tab: String = "home"
+    @State private var tab: String = "settings"
     @State private var xOffset = -150
     @State private var showShuffle: Bool = false
     @State private var randomGenre: String = ""
@@ -123,6 +123,8 @@ struct HomeView: View {
                 VStack {
                     if tab == "chart" {
                         DataView()
+                    } else if tab == "settings" {
+                        SettingsView()
                     }
                 
                 }

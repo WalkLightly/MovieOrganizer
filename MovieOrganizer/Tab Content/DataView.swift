@@ -35,6 +35,8 @@ struct DataView: View {
                             Text("View More")
                                 .font(.custom("PTSans-Narrow", size: 25))
                                 .foregroundStyle(.white)
+                               .shadow(color: Color.black.opacity(0.4), radius: 1, x: 2, y: 3)
+
                         }
                         .padding(.trailing, 10)
                         .padding(.top, -60)
@@ -50,7 +52,26 @@ struct DataView: View {
                 }
                 .background(.seafoamBlue)
                 .cornerRadius(10)
-                .shadow(color: Color.black.opacity(0.7), radius: 1, x: 2, y: 1)
+                .background(
+                    // --- Top Layer: The button itself ---
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(.blueButtonTheme)
+                        .overlay(
+                            // Add the thin black border
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(.black, lineWidth: 2)
+                        )
+                )
+                .background(
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.black)
+                    }
+                    // The magic offsets:
+                    .offset(x: 0, y: 4)  // Slightly right, heavily down
+                    .scaleEffect(x: 0.99, y: 1.0)
+                )
+             //   .shadow(color: Color.black.opacity(0.7), radius: 1, x: 2, y: 3)
 
                 VStack {
                     HStack {
@@ -152,13 +173,42 @@ struct DataView: View {
                 }
                 .background(.blueButtonTheme)
                 .cornerRadius(10)
+               // .shadow(color: Color.black.opacity(0.7), radius: 2, x: 3, y: 3)
+                .background(
+                    // --- Top Layer: The button itself ---
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(.blueButtonTheme)
+                        .overlay(
+                            // Add the thin black border
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(.black, lineWidth: 2)
+                        )
+                )
+                .background(
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.black)
+                    }
+                    // The magic offsets:
+                    .offset(x: 0, y: 4)  // Slightly right, heavily down
+                    .scaleEffect(x: 0.99, y: 1.0)
+                )
                 .padding(.top, 10)
-                .shadow(color: Color.black.opacity(0.7), radius: 1, x: 2, y: 1)
+                VStack {
+                    HStack {
+                        Text("Other Genres")
+                            .font(.custom("Poppins-Bold", size: 25))
+                            .foregroundStyle(.black)
+                            .padding(.leading, 10)
+                        Spacer()
+                    }
+                }
 
             }
             .containerRelativeFrame(.horizontal) { length, axis in
                 return length * 0.9
             }
+           
         }
         .background(.gray)
         .cornerRadius(10)
@@ -184,8 +234,7 @@ struct DataView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.black)
             }
-            // The magic offsets:
-            .offset(x: 0, y: 4)  // Slightly right, heavily down
+            .offset(x: 0, y: 4)
             .scaleEffect(x: 0.99, y: 1.0)
         )
     }
