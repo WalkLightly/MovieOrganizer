@@ -15,6 +15,11 @@ struct HomeView: View {
     @State private var showRandomlyChosenMovie: Bool = false
     @State private var randomMovie: String =
         "Chronicles of Narnia The Lion, The Witch, and the Wardrobe disc 2"
+    
+    @State private var jumpOffset: CGFloat = 0    // Controls the upward movement
+    @State private var jumpRotation: Angle = .zero
+        private let jumpHeight: CGFloat = -5 // Negative goes UP
+        private let runLeanAngle = 0.0
 
     func getIcon() -> String {
 
@@ -614,7 +619,42 @@ struct HomeView: View {
                             .foregroundStyle(.blueTheme)
 
                     }
-                    .offset(x: CGFloat(xOffset), y: 0)
+                    .offset(x: CGFloat(xOffset))
+                    .offset(y: jumpOffset)
+                    .rotationEffect(jumpRotation, anchor: .bottom)
+                    .onChange(of: tab) { _, newValue in
+                                // When the tab is clicked, start the multi-stage animation sequence:
+                                
+                                // 1. Initial State: It's resting on the ground, leaning forward towards new spot.
+                                jumpOffset = 0
+                                
+                                // Dynamic lean: Negative rotation when moving towards positive X, Positive when moving negative X.
+                                // Example for Tab 0 -> Tab 1 (moving right): lean back (-leanValue), then lean forward (+leanValue).
+                                let targetLean: Double = (newValue > tab ? runLeanAngle : -runLeanAngle) * -1
+                                jumpRotation = Angle(degrees: targetLean)
+
+                                // --- STAGE 1: JUMPING UP ---
+                                // Use a powerful spring for the ascent. The 'lean' also resets during the rise.
+                                withAnimation(.spring(response: 0.1, dampingFraction: 0.9, blendDuration: 0.1)) {
+                                    jumpOffset = jumpHeight // It goes UP
+                                    jumpRotation = Angle(degrees: -3) // Straightens up during ascent
+                                }
+                                
+                                // --- STAGE 2: FALLING DOWN (The bounce effect) ---
+                                // Use a standard non-bouncy easing (like easeIn) for the descent, then a strong bounce when it hits the ground.
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { // Timing needs tuning based on Stage 1
+                                    withAnimation(.interpolatingSpring(stiffness: 100, damping: 9, initialVelocity: 5).delay(0.0)) {
+                                        jumpOffset = 0 // It hits the ground
+                                        
+                                        // Add some rotation logic back when landing? (e.g., slight backward lean on impact)
+                                        jumpRotation = Angle(degrees: (newValue > tab ? -runLeanAngle : runLeanAngle) * 0.5)
+                                    }
+                                }
+                                
+                                // The Horizontal Position animation happens automatically and smoothly because
+                                // `horizontalPosition(for:)` recalculates and the SwiftUI system handles the transition.
+                            }
+                    
 
                 }
 
