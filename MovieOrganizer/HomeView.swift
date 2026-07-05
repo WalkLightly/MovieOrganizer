@@ -13,8 +13,27 @@ struct HomeView: View {
     @State private var showShuffle: Bool = false
     @State private var randomGenre: String = ""
     @State private var showRandomlyChosenMovie: Bool = false
-    @State private var randomMovie: String = "Chronicles of Narnia The Lion, The Witch, and the Wardrobe disc 2"
+    @State private var randomMovie: String =
+        "Chronicles of Narnia The Lion, The Witch, and the Wardrobe disc 2"
 
+    func getIcon() -> String {
+
+        switch tab {
+        case "home":
+            return "house"
+        case "search":
+            return "magnifyingglass"
+        case "chart":
+            return "chart.bar.yaxis"
+        case "history":
+            return "clock.arrow.trianglehead.clockwise.rotate.90.path.dotted"
+        case "settings":
+            return "gear"
+        default:
+            return ""
+        }
+
+    }
     var body: some View {
         ZStack {
             Color(.grayTheme).ignoresSafeArea()
@@ -25,7 +44,12 @@ struct HomeView: View {
                         Text("Video Library")
                             .font(.custom("Poppins-Bold", size: 35))
                             .foregroundStyle(.white)
-                            .shadow(color: Color.black.opacity(0.9), radius: 3, x: 4, y: 3)
+                            .shadow(
+                                color: Color.black.opacity(0.9),
+                                radius: 3,
+                                x: 4,
+                                y: 3
+                            )
 
                         Spacer()
                         VStack {
@@ -126,7 +150,7 @@ struct HomeView: View {
                     } else if tab == "settings" {
                         SettingsView()
                     }
-                
+
                 }
                 // width
                 .containerRelativeFrame(.horizontal) { length, axis in
@@ -142,7 +166,9 @@ struct HomeView: View {
                             VStack {
                                 HStack {
                                     Text("Randomizer")
-                                        .font(.custom("PTSans-Narrow", size: 40))
+                                        .font(
+                                            .custom("PTSans-Narrow", size: 40)
+                                        )
                                         .foregroundStyle(.yellowTheme)
                                     Spacer()
                                 }
@@ -152,21 +178,28 @@ struct HomeView: View {
                                         showRandomlyChosenMovie = true
                                     } label: {
                                         Text("Random Movie")
-                                            .font(.custom("PTSans-Narrow", size: 20))
+                                            .font(
+                                                .custom(
+                                                    "PTSans-Narrow",
+                                                    size: 20
+                                                )
+                                            )
                                             .padding(.vertical, 5)
                                             .padding(.horizontal, 10)
                                             .foregroundStyle(.black)
-                                        
+
                                     }
-                                    
+
                                     .background(
                                         // --- Top Layer: The button itself ---
                                         RoundedRectangle(cornerRadius: 15)
                                             .fill(.blueButtonTheme)
                                             .overlay(
                                                 // Add the thin black border
-                                                RoundedRectangle(cornerRadius: 15)
-                                                    .stroke(.black, lineWidth: 2)
+                                                RoundedRectangle(
+                                                    cornerRadius: 15
+                                                )
+                                                .stroke(.black, lineWidth: 2)
                                             )
                                     )
                                     .background(
@@ -175,32 +208,41 @@ struct HomeView: View {
                                                 .fill(.black)
                                         }
                                         // The magic offsets:
-                                            .offset(x: 0, y: 4)  // Slightly right, heavily down
-                                            .scaleEffect(x: 0.99, y: 1.0)
+                                        .offset(x: 0, y: 4)  // Slightly right, heavily down
+                                        .scaleEffect(x: 0.99, y: 1.0)
                                     )
                                     Text("- OR -")
-                                        .font(.custom("PTSans-Narrow", size: 20))
+                                        .font(
+                                            .custom("PTSans-Narrow", size: 20)
+                                        )
                                         .foregroundStyle(.white)
                                         .padding(.horizontal, 10)
                                     Button {
                                         randomGenre = "Christmas"
                                     } label: {
                                         Text("Random Genre")
-                                            .font(.custom("PTSans-Narrow", size: 20))
+                                            .font(
+                                                .custom(
+                                                    "PTSans-Narrow",
+                                                    size: 20
+                                                )
+                                            )
                                             .padding(.vertical, 5)
                                             .padding(.horizontal, 10)
                                             .foregroundStyle(.black)
-                                        
+
                                     }
-                                    
+
                                     .background(
                                         // --- Top Layer: The button itself ---
                                         RoundedRectangle(cornerRadius: 15)
                                             .fill(.blueButtonTheme)
                                             .overlay(
                                                 // Add the thin black border
-                                                RoundedRectangle(cornerRadius: 15)
-                                                    .stroke(.black, lineWidth: 2)
+                                                RoundedRectangle(
+                                                    cornerRadius: 15
+                                                )
+                                                .stroke(.black, lineWidth: 2)
                                             )
                                     )
                                     .background(
@@ -209,29 +251,33 @@ struct HomeView: View {
                                                 .fill(.black)
                                         }
                                         // The magic offsets:
-                                            .offset(x: 0, y: 4)  // Slightly right, heavily down
-                                            .scaleEffect(x: 0.99, y: 1.0)
+                                        .offset(x: 0, y: 4)  // Slightly right, heavily down
+                                        .scaleEffect(x: 0.99, y: 1.0)
                                     )
                                     Spacer()
                                 }
-                                
+
                                 if randomGenre != "" {
                                     Divider()
                                         .overlay(.white)
                                         .padding(.trailing, 20)
                                         .padding(.vertical, 20)
-                                    
-                                    
+
                                     HStack {
                                         Text(randomGenre)
-                                            .font(.custom("PTSans-Narrow", size: 30))
+                                            .font(
+                                                .custom(
+                                                    "PTSans-Narrow",
+                                                    size: 30
+                                                )
+                                            )
                                             .foregroundStyle(.yellowTheme)
                                         Spacer()
                                     }
-                                    
+
                                     HStack {
                                         VStack {
-                                            
+
                                         }
                                         .frame(width: 300, height: 200)
                                         .border(.white)
@@ -242,7 +288,12 @@ struct HomeView: View {
                                             //randomGenre = "Christmas"
                                         } label: {
                                             Text("Random From List")
-                                                .font(.custom("PTSans-Narrow", size: 20))
+                                                .font(
+                                                    .custom(
+                                                        "PTSans-Narrow",
+                                                        size: 20
+                                                    )
+                                                )
                                                 .padding(.vertical, 5)
                                                 .padding(.horizontal, 10)
                                                 .foregroundStyle(.black)
@@ -253,75 +304,84 @@ struct HomeView: View {
                                                 .fill(.blueButtonTheme)
                                                 .overlay(
                                                     // Add the thin black border
-                                                    RoundedRectangle(cornerRadius: 15)
-                                                        .stroke(.black, lineWidth: 2)
+                                                    RoundedRectangle(
+                                                        cornerRadius: 15
+                                                    )
+                                                    .stroke(
+                                                        .black,
+                                                        lineWidth: 2
+                                                    )
                                                 )
                                         )
                                         .background(
                                             ZStack {
-                                                RoundedRectangle(cornerRadius: 15)
-                                                    .fill(.black)
+                                                RoundedRectangle(
+                                                    cornerRadius: 15
+                                                )
+                                                .fill(.black)
                                             }
                                             // The magic offsets:
-                                                .offset(x: 0, y: 4)  // Slightly right, heavily down
-                                                .scaleEffect(x: 0.99, y: 1.0)
+                                            .offset(x: 0, y: 4)  // Slightly right, heavily down
+                                            .scaleEffect(x: 0.99, y: 1.0)
                                         )
                                         .padding(.top, 10)
                                         Spacer()
                                     }
                                 }
-                                
-                                                                        
+
                                 Spacer()
                             }
                             .padding(.leading, 20)
                         }
-                        .frame(width: 350, height: randomGenre != "" ? 560 : 300)
+                        .frame(
+                            width: 350,
+                            height: randomGenre != "" ? 560 : 300
+                        )
                         .cornerRadius(15)
                         .background(
-                           // --- Top Layer: The button itself ---
-                           RoundedRectangle(cornerRadius: 20)
-                               .fill(.blueTheme)
-                               .overlay(
-                                   // Add the thin black border
-                                   RoundedRectangle(cornerRadius: 20)
-                                       .stroke(.black, lineWidth: 2)
-                               )
-                       )
-                       .background(
-                           ZStack {
-                               RoundedRectangle(cornerRadius: 20)
-                                   .fill(.black)
-                           }
-                           // The magic offsets:
-                           .offset(x: 0, y: 4) // Slightly right, heavily down
-                           .scaleEffect(x: 0.99, y: 1.0)
-                       )
-                      
+                            // --- Top Layer: The button itself ---
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.blueTheme)
+                                .overlay(
+                                    // Add the thin black border
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(.black, lineWidth: 2)
+                                )
+                        )
+                        .background(
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(.black)
+                            }
+                            // The magic offsets:
+                            .offset(x: 0, y: 4)  // Slightly right, heavily down
+                            .scaleEffect(x: 0.99, y: 1.0)
+                        )
+
                         .offset(y: randomGenre != "" ? -5 : -5)
                     }
                 }
-//                .background(
-//                    // --- Top Layer: The button itself ---
-//                    RoundedRectangle(cornerRadius: 15)
-//                        .fill(.red.opacity(0.1))
-//                        .overlay(
-//                            // Add the thin black border
-//                            RoundedRectangle(cornerRadius: 15)
-//                                .stroke(.black, lineWidth: 2)
-//                        )
-//                )
-//                .background(
-//                    ZStack {
-//                        RoundedRectangle(cornerRadius: 15)
-//                            .fill(.black)
-//                    }
-//                    // The magic offsets:
-//                    .offset(x: 0, y: 4)  // Slightly right, heavily down
-//                    .scaleEffect(x: 0.99, y: 1.0)
-//                )
-     //           .border(.white)
-               // .padding(.top, 20)
+                //                .background(
+                //                    // --- Top Layer: The button itself ---
+                //                    RoundedRectangle(cornerRadius: 15)
+                //                        .fill(.red.opacity(0.1))
+                //                        .overlay(
+                //                            // Add the thin black border
+                //                            RoundedRectangle(cornerRadius: 15)
+                //                                .stroke(.black, lineWidth: 2)
+                //                        )
+                //                )
+                //                .background(
+                //                    ZStack {
+                //                        RoundedRectangle(cornerRadius: 15)
+                //                            .fill(.black)
+                //                    }
+                //                    // The magic offsets:
+                //                    .offset(x: 0, y: 4)  // Slightly right, heavily down
+                //                    .scaleEffect(x: 0.99, y: 1.0)
+                //                )
+                //           .border(.white)
+                // .padding(.top, 20)
 
                 ZStack {
                     HStack {
@@ -337,7 +397,7 @@ struct HomeView: View {
                                 if tab == "home" {
                                     Image(systemName: "house")
                                         .font(.system(size: 20))
-                                        .foregroundStyle(.yellowTheme)
+                                        .foregroundStyle(.blueTheme)
                                 } else {
                                     Image(systemName: "house")
                                         .font(.system(size: 20))
@@ -410,13 +470,19 @@ struct HomeView: View {
                                 }
                             }) {
                                 if tab == "history" {
-                                    Image(systemName: "clock.arrow.trianglehead.clockwise.rotate.90.path.dotted")
-                                        .font(.system(size: 20))
-                                        .foregroundStyle(.yellowTheme)
+                                    Image(
+                                        systemName:
+                                            "clock.arrow.trianglehead.clockwise.rotate.90.path.dotted"
+                                    )
+                                    .font(.system(size: 20))
+                                    .foregroundStyle(.yellowTheme)
                                 } else {
-                                    Image(systemName: "clock.arrow.trianglehead.clockwise.rotate.90.path.dotted")
-                                        .font(.system(size: 20))
-                                        .foregroundStyle(.yellowTheme)
+                                    Image(
+                                        systemName:
+                                            "clock.arrow.trianglehead.clockwise.rotate.90.path.dotted"
+                                    )
+                                    .font(.system(size: 20))
+                                    .foregroundStyle(.yellowTheme)
                                 }
                             }
                             .frame(width: 50, height: 40)
@@ -453,27 +519,27 @@ struct HomeView: View {
 
                         }
                         .padding()
-                        .frame(width: 300, height: 60)
+                        .frame(width: 300, height: 70)
                         // .background(.blueTheme)
                         .cornerRadius(30)
                         .background(
                             // --- Top Layer: The button itself ---
-                            RoundedRectangle(cornerRadius: 30)
+                            RoundedRectangle(cornerRadius: 20)
                                 .fill(.blueTheme)
                                 .overlay(
                                     // Add the thin black border
-                                    RoundedRectangle(cornerRadius: 30)
+                                    RoundedRectangle(cornerRadius: 20)
                                         .stroke(.black, lineWidth: 1)
                                 )
                         )
                         .background(
                             ZStack {
-                                RoundedRectangle(cornerRadius: 30)
+                                RoundedRectangle(cornerRadius: 20)
                                     .fill(.black)
                             }
                             // The magic offsets:
-                            .offset(x: 0, y: 5)  // Slightly right, heavily down
-                            .scaleEffect(x: 0.99, y: 1.0)
+                            .offset(x: 0, y: 6)  // Slightly right, heavily down
+                            .scaleEffect(x: 1.0, y: 1.0)
                         )
                         VStack {
                             Button(action: {
@@ -519,11 +585,37 @@ struct HomeView: View {
                         )
                     }
 
-                    Rectangle()
-                        .fill(.yellowTheme.opacity(0.3))
-                        .frame(width: 50, height: 40)
-                        .cornerRadius(20)
-                        .offset(x: CGFloat(xOffset), y: 0)
+                    ZStack {
+                        Rectangle()
+                            .fill(.yellowTheme)
+                            .frame(width: 55, height: 55)
+                            .cornerRadius(15)
+                            .background(
+                                // --- Top Layer: The button itself ---
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(.yellowTheme)
+                                    .overlay(
+                                        // Add the thin black border
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .stroke(.black, lineWidth: 1)
+                                    )
+                            )
+                            .background(
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .fill(.black)
+                                }
+                                // The magic offsets:
+                                .offset(x: 0, y: 3)  // Slightly right, heavily down
+                                .scaleEffect(x: 1.0, y: 1.0)
+                            )
+                        Image(systemName: getIcon())
+                            .font(.system(size: 20))
+                            .foregroundStyle(.blueTheme)
+
+                    }
+                    .offset(x: CGFloat(xOffset), y: 0)
+
                 }
 
             }
@@ -536,7 +628,7 @@ struct HomeView: View {
             .containerRelativeFrame(.vertical) { length, axis in
                 return length * 1.05
             }
-            
+
             if showRandomlyChosenMovie {
                 VStack {
                     VStack {
@@ -558,7 +650,7 @@ struct HomeView: View {
                             Spacer()
                         }
                         .padding(.leading, 10)
-                        
+
                         HStack {
                             Spacer()
                             Button {
@@ -568,25 +660,25 @@ struct HomeView: View {
                                     .font(.custom("PTSans-Narrow", size: 25))
                                     .foregroundStyle(.seafoamBlue)
                             }
-//                            .background(
-//                                // --- Top Layer: The button itself ---
-//                                RoundedRectangle(cornerRadius: 30)
-//                                    .fill(.seafoamBlue)
-//                                    .overlay(
-//                                        // Add the thin black border
-//                                        RoundedRectangle(cornerRadius: 30)
-//                                            .stroke(.black, lineWidth: 2)
-//                                    )
-//                            )
-//                            .background(
-//                                ZStack {
-//                                    RoundedRectangle(cornerRadius: 30)
-//                                        .fill(.black)
-//                                }
-//                                // The magic offsets:
-//                                .offset(x: 0, y: 4)  // Slightly right, heavily down
-//                                .scaleEffect(x: 0.99, y: 1.0)
-//                            )
+                            //                            .background(
+                            //                                // --- Top Layer: The button itself ---
+                            //                                RoundedRectangle(cornerRadius: 30)
+                            //                                    .fill(.seafoamBlue)
+                            //                                    .overlay(
+                            //                                        // Add the thin black border
+                            //                                        RoundedRectangle(cornerRadius: 30)
+                            //                                            .stroke(.black, lineWidth: 2)
+                            //                                    )
+                            //                            )
+                            //                            .background(
+                            //                                ZStack {
+                            //                                    RoundedRectangle(cornerRadius: 30)
+                            //                                        .fill(.black)
+                            //                                }
+                            //                                // The magic offsets:
+                            //                                .offset(x: 0, y: 4)  // Slightly right, heavily down
+                            //                                .scaleEffect(x: 0.99, y: 1.0)
+                            //                            )
                         }
                         .padding(.top, 30)
                         .padding(.bottom, 15)
@@ -595,10 +687,10 @@ struct HomeView: View {
                     .containerRelativeFrame(.horizontal) { length, axis in
                         return length * 0.9
                     }
-//                    // height
-//                    .containerRelativeFrame(.vertical) { length, axis in
-//                        return length * 0.2
-//                    }
+                    //                    // height
+                    //                    .containerRelativeFrame(.vertical) { length, axis in
+                    //                        return length * 0.2
+                    //                    }
                     .background(.blueTheme)
                     .cornerRadius(10)
                     .shadow(
@@ -609,13 +701,13 @@ struct HomeView: View {
                     )
                 }
                 .frame(width: 600, height: 1000)
-                    .background(.black.opacity(0.6))
+                .background(.black.opacity(0.6))
             }
 
         }
         .edgesIgnoringSafeArea(.all)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        
+
     }
 }
 
