@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MovieListView: View {
     @StateObject private var viewModel = MovieListViewModel()
-    @State var searchText: String = ""
+    @State var searchString: String = ""
 
     var body: some View {
         VStack(spacing: 20) {
@@ -19,7 +19,7 @@ struct MovieListView: View {
                     .foregroundStyle(.blueButtonTheme)
                 TextField(
                     "",
-                    text: $searchText,
+                    text: $searchString,
                     prompt: Text("Search for a movie . . .").foregroundStyle(.blueTheme.opacity(0.5))
                 )
                     .frame(height: 50)
@@ -34,9 +34,9 @@ struct MovieListView: View {
                 Image(systemName: "xmark")
                     .font(.system(size: 30))
                     .foregroundStyle(.blueButtonTheme)
-                    .opacity(searchText == "" ? 0 : 1)
+                    .opacity(searchString == "" ? 0 : 1)
                     .onTapGesture {
-                        searchText = ""
+                        searchString = ""
                     }
             }
             .frame(height: 60)
@@ -65,7 +65,9 @@ struct MovieListView: View {
             VStack {
                 ScrollView {
                     ForEach(viewModel.movies, id: \.id) { movie in
-                        MovieView(movie: movie)
+                        if searchString == "" || movie.name.lowercased().contains(searchString.lowercased()) {
+                            MovieView(movie: movie)
+                        }
                     }
                     
                 }

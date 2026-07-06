@@ -588,8 +588,8 @@ struct HomeView: View {
                                     .fill(.black)
                             }
                             // The magic offsets:
-                            .offset(x: 0, y: 4)  // Slightly right, heavily down
-                            .scaleEffect(x: 0.99, y: 1.0)
+                            .offset(x: 0, y: 6)  // Slightly right, heavily down
+                                .scaleEffect(x: 1.0, y: 1.0)
                         )
                     }
 
