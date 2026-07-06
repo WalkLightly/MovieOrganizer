@@ -24,18 +24,18 @@ struct HomeView: View {
     func getIcon() -> String {
 
         switch tab {
-        case "home":
-            return "house"
-        case "search":
-            return "magnifyingglass"
-        case "chart":
-            return "chart.bar.yaxis"
-        case "history":
-            return "clock.arrow.trianglehead.clockwise.rotate.90.path.dotted"
-        case "settings":
-            return "gear"
-        default:
-            return ""
+            case "home":
+                return "house"
+            case "search":
+                return "magnifyingglass"
+            case "chart":
+                return "chart.bar.yaxis"
+            case "history":
+                return "clock.arrow.trianglehead.clockwise.rotate.90.path.dotted"
+            case "settings":
+                return "gear"
+            default:
+                return ""
         }
 
     }
@@ -150,7 +150,9 @@ struct HomeView: View {
 
                 // MAIN VIEW
                 VStack {
-                    if tab == "chart" {
+                    if tab == "home" {
+                        MovieListView()
+                    } else if tab == "chart" {
                         DataView()
                     } else if tab == "settings" {
                         SettingsView()
@@ -668,6 +670,7 @@ struct HomeView: View {
             .containerRelativeFrame(.vertical) { length, axis in
                 return length * 1.05
             }
+            
 
             if showRandomlyChosenMovie {
                 VStack {

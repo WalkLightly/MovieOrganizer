@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Folder: Hashable {
+struct FolderLoc: Hashable {
     var id: String
     var name: String
 }
@@ -25,35 +25,35 @@ struct Folder: Hashable {
 //TH     Thanksgiving
 //CM    Christmas
 
-var folders: [Folder] = [
-    Folder(id: "1", name: "A"),
-    Folder(id: "2", name: "B"),
-    Folder(id: "3", name: "C"),
-    Folder(id: "4", name: "D"),
-    Folder(id: "5", name: "E"),
-    Folder(id: "6", name: "F"),
+var folders: [FolderLoc] = [
+    FolderLoc(id: "1", name: "A"),
+    FolderLoc(id: "2", name: "B"),
+    FolderLoc(id: "3", name: "C"),
+    FolderLoc(id: "4", name: "D"),
+    FolderLoc(id: "5", name: "E"),
+    FolderLoc(id: "6", name: "F"),
 ]
 
-struct Genre: Hashable {
+struct GenreLoc: Hashable {
     var id: String
     var name: String
     var abbreviation: String
 }
 
-var genres: [Genre] = [
-    Genre(id: "7", name: "Action", abbreviation: "A"),
-    Genre(id: "8", name: "Unknown", abbreviation: "B"),
-    Genre(id: "9", name: "Comedy", abbreviation: "C"),
-    Genre(id: "10", name: "Drama", abbreviation: "D"),
-    Genre(id: "11", name: "Fantasy/Fitness", abbreviation: "F"),
-    Genre(id: "12", name: "Horror", abbreviation: "H"),
-    Genre(id: "13", name: "LDS", abbreviation: "L"),
-    Genre(id: "14", name: "Musical", abbreviation: "M"),
-    Genre(id: "15", name: "Romance", abbreviation: "R"),
-    Genre(id: "16", name: "Sci-Fi", abbreviation: "S"),
-    Genre(id: "17", name: "Halloween", abbreviation: "HA"),
-    Genre(id: "18", name: "Thanksgiving", abbreviation: "TM"),
-    Genre(id: "19", name: "Christmas", abbreviation: "CM"),
+var genres: [GenreLoc] = [
+    GenreLoc(id: "7", name: "Action", abbreviation: "A"),
+    GenreLoc(id: "8", name: "Unknown", abbreviation: "B"),
+    GenreLoc(id: "9", name: "Comedy", abbreviation: "C"),
+    GenreLoc(id: "10", name: "Drama", abbreviation: "D"),
+    GenreLoc(id: "11", name: "Fantasy/Fitness", abbreviation: "F"),
+    GenreLoc(id: "12", name: "Horror", abbreviation: "H"),
+    GenreLoc(id: "13", name: "LDS", abbreviation: "L"),
+    GenreLoc(id: "14", name: "Musical", abbreviation: "M"),
+    GenreLoc(id: "15", name: "Romance", abbreviation: "R"),
+    GenreLoc(id: "16", name: "Sci-Fi", abbreviation: "S"),
+    GenreLoc(id: "17", name: "Halloween", abbreviation: "HA"),
+    GenreLoc(id: "18", name: "Thanksgiving", abbreviation: "TM"),
+    GenreLoc(id: "19", name: "Christmas", abbreviation: "CM"),
 ]
 
 struct SettingsView: View {
