@@ -11,8 +11,17 @@ struct MovieListView: View {
     @StateObject private var viewModel = MovieListViewModel()
     @State var searchString: String = ""
 
+    func getMovieCountWithFilter() -> Int {
+        if searchString.isEmpty {
+            return viewModel.movies.count
+        } else {
+            return viewModel.movies.filter { movie in
+                movie.name.lowercased().contains(searchString.lowercased())
+            }.count
+        }
+    }
     var body: some View {
-        VStack(spacing: 20) {
+        VStack {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .font(.system(size: 30))
@@ -20,7 +29,7 @@ struct MovieListView: View {
                 TextField(
                     "",
                     text: $searchString,
-                    prompt: Text("Search for a movie . . .").foregroundStyle(.blueTheme.opacity(0.5))
+                    prompt: Text("Search for a movie or genre...").foregroundStyle(.blueTheme.opacity(0.5))
                 )
                     .frame(height: 50)
                     .font(
@@ -62,10 +71,23 @@ struct MovieListView: View {
                     .offset(x: 0, y: 5)  // Slightly right, heavily down
                     .scaleEffect(x: 1.0, y: 1.0)
             )
+            HStack {
+                Text("Total Movies: \(getMovieCountWithFilter())")
+                    .padding(.leading, 20)
+                    .font(
+                        .custom("Poppins-Bold", size: 20)
+                    )
+                    .foregroundStyle(.yellowTheme)
+                Spacer()
+            }
+            .padding(.top, -5)
             VStack {
                 ScrollView {
                     ForEach(viewModel.movies, id: \.id) { movie in
-                        if searchString == "" || movie.name.lowercased().contains(searchString.lowercased()) {
+                        if searchString == "" ||
+                            movie.name.lowercased().contains(searchString.lowercased()) ||
+                            movie.genres.contains(searchString)
+                        {
                             MovieView(movie: movie)
                         }
                     }
@@ -106,6 +128,7 @@ struct MovieListView: View {
                     try await viewModel.getAllMovies()
                 }
             }
+            .padding(.top, -10)
         }
     }
 }
