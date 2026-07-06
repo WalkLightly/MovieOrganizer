@@ -14,7 +14,7 @@ struct HomeView: View {
     @State private var randomGenre: String = ""
     @State private var showRandomlyChosenMovie: Bool = false
     @State private var randomMovie: String =
-        "Chronicles of Narnia The Lion, The Witch, and the Wardrobe disc 2"
+        "Chronicles of Narnia The Lion, The Witch, and the Wardrobe disc 1"
     
     @State private var jumpOffset: CGFloat = 0    // Controls the upward movement
     @State private var jumpRotation: Angle = .zero
