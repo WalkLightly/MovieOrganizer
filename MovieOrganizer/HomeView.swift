@@ -159,13 +159,14 @@ struct HomeView: View {
                     }
 
                 }
+
                 // width
                 .containerRelativeFrame(.horizontal) { length, axis in
                     return length * 0.95
                 }
                 // height
                 .containerRelativeFrame(.vertical) { length, axis in
-                    return length * 0.84
+                    return length * 0.85
                 }
                 .overlay(alignment: .topTrailing) {
                     if showShuffle {
@@ -749,6 +750,8 @@ struct HomeView: View {
 
         }
         .edgesIgnoringSafeArea(.all)
+        .ignoresSafeArea(.keyboard, edges: .bottom)
+
         .frame(maxWidth: .infinity, maxHeight: .infinity)
 
     }
