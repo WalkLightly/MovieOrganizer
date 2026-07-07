@@ -41,7 +41,7 @@ struct HomeView: View {
     }
     var body: some View {
         ZStack {
-            Color(.grayTheme).ignoresSafeArea()
+            Color(.blueTheme).ignoresSafeArea()
 
             VStack {
                 HStack {
@@ -151,7 +151,9 @@ struct HomeView: View {
                 // MAIN VIEW
                 VStack {
                     if tab == "home" {
+                        Spacer()
                         MovieListView()
+                        Spacer()
                     } else if tab == "chart" {
                         DataView()
                     } else if tab == "settings" {
@@ -349,7 +351,7 @@ struct HomeView: View {
                         .background(
                             // --- Top Layer: The button itself ---
                             RoundedRectangle(cornerRadius: 20)
-                                .fill(.blueTheme)
+                                .fill(.grayTheme)
                                 .overlay(
                                     // Add the thin black border
                                     RoundedRectangle(cornerRadius: 20)
@@ -409,7 +411,7 @@ struct HomeView: View {
                                 } else {
                                     Image(systemName: "house")
                                         .font(.system(size: 20))
-                                        .foregroundStyle(.yellowTheme)
+                                        .foregroundStyle(.blueTheme)
                                 }
                             }
                             .frame(width: 50, height: 40)
@@ -434,7 +436,7 @@ struct HomeView: View {
                                 } else {
                                     Image(systemName: "magnifyingglass")
                                         .font(.system(size: 20))
-                                        .foregroundStyle(.yellowTheme)
+                                        .foregroundStyle(.blueTheme)
                                 }
                             }
                             .frame(width: 50, height: 40)
@@ -459,7 +461,7 @@ struct HomeView: View {
                                 } else {
                                     Image(systemName: "chart.bar.yaxis")
                                         .font(.system(size: 20))
-                                        .foregroundStyle(.yellowTheme)
+                                        .foregroundStyle(.blueTheme)
                                 }
                             }
                             .frame(width: 50, height: 40)
@@ -490,7 +492,7 @@ struct HomeView: View {
                                             "clock.arrow.trianglehead.clockwise.rotate.90.path.dotted"
                                     )
                                     .font(.system(size: 20))
-                                    .foregroundStyle(.yellowTheme)
+                                    .foregroundStyle(.blueTheme)
                                 }
                             }
                             .frame(width: 50, height: 40)
@@ -515,7 +517,7 @@ struct HomeView: View {
                                 } else {
                                     Image(systemName: "gear")
                                         .font(.system(size: 20))
-                                        .foregroundStyle(.yellowTheme)
+                                        .foregroundStyle(.blueTheme)
                                 }
                             }
                             .frame(width: 50, height: 40)
@@ -527,13 +529,13 @@ struct HomeView: View {
 
                         }
                         .padding()
-                        .frame(width: 300, height: 70)
+                        .frame(width: 300, height: 55)
                         // .background(.blueTheme)
                         .cornerRadius(30)
                         .background(
                             // --- Top Layer: The button itself ---
                             RoundedRectangle(cornerRadius: 20)
-                                .fill(.blueTheme)
+                                .fill(.backgroundTheme)
                                 .overlay(
                                     // Add the thin black border
                                     RoundedRectangle(cornerRadius: 20)
@@ -569,15 +571,13 @@ struct HomeView: View {
                                 trigger: tab
                             )
                         }
-                        .frame(width: 60, height: 60)
+                        .frame(width: 50, height: 50)
                         .background(.yellowTheme)
                         .clipShape(Capsule())
                         .background(
-                            // --- Top Layer: The button itself ---
-                            RoundedRectangle(cornerRadius: 30)
+                            RoundedRectangle(cornerRadius: 20)
                                 .fill(.blueTheme)
                                 .overlay(
-                                    // Add the thin black border
                                     RoundedRectangle(cornerRadius: 30)
                                         .stroke(.black, lineWidth: 2)
                                 )
@@ -596,7 +596,7 @@ struct HomeView: View {
                     ZStack {
                         Rectangle()
                             .fill(.yellowTheme)
-                            .frame(width: 55, height: 55)
+                            .frame(width: 40, height: 40)
                             .cornerRadius(15)
                             .background(
                                 // --- Top Layer: The button itself ---

@@ -97,7 +97,7 @@ struct SettingsView: View {
                                                 .focused($isTextFieldFocused)
 
                                         }
-                                        .frame(width: 170)
+                                        .frame(width: 160)
                                         .background(.blueTheme)
                                         .cornerRadius(10)
 
@@ -106,17 +106,17 @@ struct SettingsView: View {
                                             Text(folder.name)
                                                 .font(
                                                     .custom(
-                                                        "PTSans-Narrow",
+                                                        "Poppins-Bold",
                                                         size: 40
                                                     )
                                                 )
-                                                .foregroundStyle(.white)
+                                                .foregroundStyle(.black)
                                                 .padding(.leading, 10)
                                                 
                                                 
                                             Spacer()
                                         }
-                                        .frame(width: 170)
+                                        .frame(width: 160)
                                         .onTapGesture {
                                             editingId = folder.id
                                             newFolderName = folder.name
@@ -134,7 +134,7 @@ struct SettingsView: View {
                                                         .font(
                                                             .custom(
                                                                 "PTSans-Narrow",
-                                                                size: 20
+                                                                size: 18
                                                             )
                                                         )
 
@@ -172,7 +172,7 @@ struct SettingsView: View {
                                                         .font(
                                                             .custom(
                                                                 "PTSans-Narrow",
-                                                                size: 20
+                                                                size: 18
                                                             )
                                                         )
                                                         .foregroundStyle(.black)
@@ -220,13 +220,18 @@ struct SettingsView: View {
                                     }
                                     .frame(width: 80)
                                 }
+                                .overlay(alignment: .bottom) {
+                                    Rectangle()
+                                        .frame(height: 1) // This sets the thickness of your border
+                                        .foregroundColor(.black.opacity(0.1)) // This sets the border color
+                                }
                             }
                         }
                         .frame(height: 350)
                     } label: {
                         Text("Edit Folders")
                             .font(.custom("Poppins-Bold", size: 25))
-                            .foregroundStyle(.yellowTheme)
+                            .foregroundStyle(.blueTheme)
                             .padding(.leading, 10)
 
                     }
@@ -235,7 +240,7 @@ struct SettingsView: View {
                 .background(
                     // --- Top Layer: The button itself ---
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(.blueButtonTheme)
+                        .fill(.backgroundTheme)
                         .overlay(
                             // Add the thin black border
                             RoundedRectangle(cornerRadius: 10)
@@ -251,8 +256,6 @@ struct SettingsView: View {
                     .offset(x: 0, y: 6)  // Slightly right, heavily down
                     .scaleEffect(x: 1.0, y: 1.0)
                 )
-                //.cornerRadius(10)
-                .background(.blueButtonTheme)
 
                 VStack {
                     DisclosureGroup {
@@ -285,7 +288,7 @@ struct SettingsView: View {
                                                 .padding(.leading, 10)
                                                 .padding(.vertical, 5)
                                                 .focused($isTextFieldFocused)
-                                                .frame(width: 230)
+                                                .frame(width: 200)
                                                 .background(.blueTheme)
                                                 .cornerRadius(10)
                                                 TextField(
@@ -302,7 +305,7 @@ struct SettingsView: View {
                                                 .padding(.leading, 10)
                                                 .padding(.vertical, 5)
                                                 .focused($isTextFieldFocused)
-                                                .frame(width: 230)
+                                                .frame(width: 200)
                                                 .background(.blueTheme)
                                                 .cornerRadius(10)
                                             }
@@ -335,7 +338,7 @@ struct SettingsView: View {
                                                             size: 25
                                                         )
                                                     )
-                                                    .foregroundStyle(.white)
+                                                    .foregroundStyle(.black)
                                                  //   .padding(.leading, 10)
                                                     .onTapGesture {
                                                         editingId = genre.id
@@ -347,12 +350,8 @@ struct SettingsView: View {
                                             }
 
                                         }
-                                        .frame(width: 250)
-                                        .overlay(alignment: .bottom) {
-                                            Rectangle()
-                                                .frame(height: 1) // This sets the thickness of your border
-                                                .foregroundColor(.gray.opacity(0.3)) // This sets the border color
-                                        }
+                                        .frame(width: 200)
+                                       
                                     }
                                     //Spacer()
                                     HStack {
@@ -365,7 +364,7 @@ struct SettingsView: View {
                                                         .font(
                                                             .custom(
                                                                 "PTSans-Narrow",
-                                                                size: 20
+                                                                size: 18
                                                             )
                                                         )
 
@@ -376,7 +375,7 @@ struct SettingsView: View {
                                                         )
                                                         .padding(.vertical, 5)
                                                 }
-                                                .frame(width: 80, height: 50)
+                                                .frame(width: 75, height: 50)
                                                 .background(.yellowTheme)
                                                 .cornerRadius(10)
                                                 .background(
@@ -403,7 +402,7 @@ struct SettingsView: View {
                                                         .font(
                                                             .custom(
                                                                 "PTSans-Narrow",
-                                                                size: 20
+                                                                size: 18
                                                             )
                                                         )
                                                         .foregroundStyle(.black)
@@ -413,7 +412,7 @@ struct SettingsView: View {
                                                         )
                                                         .padding(.vertical, 5)
                                                 }
-                                                .frame(width: 80, height: 50)
+                                                .frame(width: 75, height: 50)
                                                 .background(.seafoamBlue)
                                                 .cornerRadius(10)
                                                 .background(
@@ -452,13 +451,18 @@ struct SettingsView: View {
                                     }
                                     .frame(width: 80)
                                 }
+                                .overlay(alignment: .bottom) {
+                                    Rectangle()
+                                        .frame(height: 1) // This sets the thickness of your border
+                                        .foregroundColor(.black.opacity(0.1)) // This sets the border color
+                                }
                             }
                         }
                         .frame(height: 400)
                     } label: {
                         Text("Edit Genres")
                             .font(.custom("Poppins-Bold", size: 25))
-                            .foregroundStyle(.yellowTheme)
+                            .foregroundStyle(.blueTheme)
                             .padding(.leading, 10)
 
                     }
@@ -467,7 +471,7 @@ struct SettingsView: View {
                 .background(
                     // --- Top Layer: The button itself ---
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(.blueButtonTheme)
+                        .fill(.backgroundTheme)
                         .overlay(
                             // Add the thin black border
                             RoundedRectangle(cornerRadius: 10)
@@ -487,6 +491,10 @@ struct SettingsView: View {
                 //.background(.blueButtonTheme)
             }
             .ignoresSafeArea()
+            .containerRelativeFrame(.horizontal) { length, axis in
+                return length * 0.9
+            }
+            .padding(.top, 15)
         }
         //  .background(.gray)
         .cornerRadius(10)
@@ -497,6 +505,24 @@ struct SettingsView: View {
         .containerRelativeFrame(.vertical) { length, axis in
             return length * 0.8
         }
+        .background(
+            // --- Top Layer: The button itself ---
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.backgroundTheme)
+                .overlay(
+                    // Add the thin black border
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(.black, lineWidth: 2)
+                )
+        )
+        .background(
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.black)
+            }
+                .offset(x: 0, y: 4)
+                .scaleEffect(x: 0.99, y: 1.0)
+        )
         .onAppear {
             editingId = ""
             newFolderName = ""

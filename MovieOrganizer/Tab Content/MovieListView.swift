@@ -24,63 +24,70 @@ struct MovieListView: View {
         VStack {
             HStack {
                 Image(systemName: "magnifyingglass")
-                    .font(.system(size: 30))
+                    .font(.system(size: 20))
                     .foregroundStyle(.blueButtonTheme)
                 TextField(
                     "",
                     text: $searchString,
                     prompt: Text("Search for a movie or genre...").foregroundStyle(.blueTheme.opacity(0.5))
                 )
-                    .frame(height: 50)
+                    .frame(height: 30)
                     .font(
-                        .custom("PTSans-Narrow", size: 25)
+                        .custom("PTSans-Narrow", size: 23)
                     )
                     .containerRelativeFrame(.horizontal) { length, axis in
                         return length * 0.67
                     }
-                    .background(.offwhite)
+                    .background(.backgroundTheme)
                     .foregroundStyle(.black)
                 Image(systemName: "xmark")
-                    .font(.system(size: 30))
+                    .font(.system(size: 25))
                     .foregroundStyle(.blueButtonTheme)
                     .opacity(searchString == "" ? 0 : 1)
                     .onTapGesture {
                         searchString = ""
                     }
             }
-            .frame(height: 60)
+            .frame(height: 40)
             .containerRelativeFrame(.horizontal) { length, axis in
-                return length * 0.95
+                return length * 0.90
             }
+            //.background(.backgroundTheme)
+            
             .background(
                 // --- Top Layer: The button itself ---
-                RoundedRectangle(cornerRadius: 30)
-                    .fill(.offwhite)
+                RoundedRectangle(cornerRadius: 25)
+                    .fill(.backgroundTheme)
                     .overlay(
                         // Add the thin black border
-                        RoundedRectangle(cornerRadius: 30)
-                            .stroke(.black, lineWidth: 1)
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(.black, lineWidth: 0.5)
                     )
             )
-            .background(
-                ZStack {
-                    RoundedRectangle(cornerRadius: 30)
-                        .fill(.black)
-                }
+            .padding(.top, 20)
+//            .background(
+//                ZStack {
+//                    RoundedRectangle(cornerRadius: 30)
+//                        .fill(.black)
+//                }
                 // The magic offsets:
-                    .offset(x: 0, y: 5)  // Slightly right, heavily down
-                    .scaleEffect(x: 1.0, y: 1.0)
-            )
+//                    .offset(x: 0, y: 5)  // Slightly right, heavily down
+//                    .scaleEffect(x: 1.0, y: 1.0)
+ //           )
             HStack {
                 Text("Total Movies: \(getMovieCountWithFilter())")
                     .padding(.leading, 20)
                     .font(
                         .custom("Poppins-Bold", size: 20)
                     )
-                    .foregroundStyle(.yellowTheme)
+                    .foregroundStyle(.blueButtonTheme)
                 Spacer()
             }
-            .padding(.top, -5)
+            .padding(.top, 5)
+            Divider()
+                .frame(height: 3)
+                .overlay(.black)
+                .padding(.top, -5)
             VStack {
                 ScrollView {
                     ForEach(viewModel.movies, id: \.id) { movie in
@@ -102,27 +109,9 @@ struct MovieListView: View {
             }
             // height
             .containerRelativeFrame(.vertical) { length, axis in
-                return length * 0.70
+                return length * 0.65
             }
-            .background(
-                // --- Top Layer: The button itself ---
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(.backgroundTheme)
-                    .overlay(
-                        // Add the thin black border
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(.black, lineWidth: 1)
-                    )
-            )
-            .background(
-                ZStack {
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(.black)
-                }
-                // The magic offsets:
-                    .offset(x: 0, y: 6)  // Slightly right, heavily down
-                    .scaleEffect(x: 1.0, y: 1.0)
-            )
+         
             .onAppear {
                 Task {
                     try await viewModel.getAllMovies()
@@ -130,6 +119,26 @@ struct MovieListView: View {
             }
             .padding(.top, -10)
         }
+        .cornerRadius(20)
+        .background(
+            // --- Top Layer: The button itself ---
+            RoundedRectangle(cornerRadius: 20)
+                .fill(.backgroundTheme)
+                .overlay(
+                    // Add the thin black border
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(.black, lineWidth: 1)
+                )
+        )
+        .background(
+            ZStack {
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(.black)
+            }
+            // The magic offsets:
+                .offset(x: 0, y: 6)  // Slightly right, heavily down
+                .scaleEffect(x: 1.0, y: 1.0)
+        )
     }
 }
 

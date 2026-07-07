@@ -15,63 +15,70 @@ struct MovieView: View {
             HStack {
                 Text(movie.name)
                     .font(
-                        .custom("Poppins-Bold", size: 20)
+                        .custom("PTSans-Narrow", size: 25)
                     )
                     .foregroundStyle(.blueTheme)
-                    .padding(10)
+                    .padding(.leading, 10)
+                    .padding(.bottom, 8)
+                    .padding(.top, -5)
                 Spacer()
             }
             HStack {
-                ForEach(movie.genres, id: \.self) { genre in
-                    VStack {
-                        Text(genre)
-                            .font(
-                                .custom("PTSans-Narrow", size: 15)
+                ScrollView(.horizontal, showsIndicators: true) {
+                    HStack(spacing: -3) {
+                        ForEach(movie.genres, id: \.self) { genre in
+                            VStack {
+                                Text(genre)
+                                    .font(
+                                        .custom("Poppins-Bold", size: 12)
+                                    )
+                                    .foregroundStyle(.black)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 3)
+                            }
+                            .background(
+                                // --- Top Layer: The button itself ---
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(.seafoamBlue)
+                                    .overlay(
+                                        // Add the thin black border
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(.black, lineWidth: 1)
+                                    )
                             )
-                            .foregroundStyle(.black)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 5)
-                    }
-                    
-                    .background(
-                        // --- Top Layer: The button itself ---
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(.seafoamBlue)
-                            .overlay(
-                                // Add the thin black border
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(.black, lineWidth: 1)
+                            .background(
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(.black)
+                                }
+                                // The magic offsets:
+                                    .offset(x: 0, y: 4)  // Slightly right, heavily down
+                                    .scaleEffect(x: 1.0, y: 1.0)
                             )
-                    )
-                    .background(
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(.black)
                         }
-                        // The magic offsets:
-                        .offset(x: 0, y: 4)  // Slightly right, heavily down
-                        .scaleEffect(x: 1.0, y: 1.0)
-                    )
+                        .padding(.trailing, 5)
+                        .padding(.bottom, 5)
+                        .padding(.leading, 3)
+                    }
                 }
-                .padding(.trailing, 5)
-                if movie.genres.count > 0 {
-                    Divider()
-                        .frame(height: 30)
-                        .background(.black)
+                .containerRelativeFrame(.horizontal) { length, axis in
+                    return length * 0.73
                 }
                 HStack {
                     ZStack {
                         Image(systemName: "folder.fill")
                             .foregroundStyle(.blueButtonTheme)
-                            .font(.system(size: 40))
-                        Text("B12")
-                            .font(.custom("PTSans-Narrow", size: 20))
+                            .font(.system(size: 30))
+                        Text("\(movie.folder)\(movie.location)")
+                            .font(.custom("PTSans-Narrow", size: 15))
                             .padding(.horizontal, 10)
                             .foregroundStyle(.white)
                     }
                     Spacer()
                 }
-               Spacer()
+                //Spacer()
+                
+                
             }
             .padding(.leading, 10)
             .padding(.bottom, 10)
@@ -87,5 +94,5 @@ struct MovieView: View {
 }
 
 #Preview {
-    MovieView(movie: Movie.init(id: "1", isCableRecording: false, name: "What if it is a really long one for this movie", genres: ["Fantasy/Fitness"], folder: "", location: "", type: ""))
+    MovieView(movie: Movie.init(id: "1", isCableRecording: false, name: "What if it is a really long one for this movie", genres: ["Fantasy/Fitness", "Horror"], folder: "H", location: "23", type: ""))
 }

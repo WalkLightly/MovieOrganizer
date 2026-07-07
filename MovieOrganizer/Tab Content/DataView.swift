@@ -23,7 +23,7 @@ struct DataView: View {
                 VStack {
                     Text("Halloween")
                         .font(.custom("Poppins-Bold", size: 35))
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.seafoamBlue)
                         .padding(.top, 25)
                     Text("120")
                         .font(.custom("Poppins-Bold", size: 60))
@@ -52,16 +52,15 @@ struct DataView: View {
                 .containerRelativeFrame(.vertical) { length, axis in
                     return length * 0.27
                 }
-                .background(.seafoamBlue)
                 .cornerRadius(10)
                 .background(
                     // --- Top Layer: The button itself ---
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(.blueButtonTheme)
+                        .fill(.blueTheme)
                         .overlay(
                             // Add the thin black border
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(.black, lineWidth: 2)
+                                .stroke(.black, lineWidth: 3)
                         )
                 )
                 .background(
@@ -70,8 +69,8 @@ struct DataView: View {
                             .fill(.black)
                     }
                     // The magic offsets:
-                        .offset(x: 0, y: 4)  // Slightly right, heavily down
-                        .scaleEffect(x: 0.99, y: 1.0)
+                        .offset(x: 0, y: 5)  // Slightly right, heavily down
+                        .scaleEffect(x: 1.0, y: 1.0)
                 )
                 //   .shadow(color: Color.black.opacity(0.7), radius: 1, x: 2, y: 3)
                 
@@ -145,7 +144,6 @@ struct DataView: View {
                             Spacer()
                         }
                         HStack {
-                            
                             VStack {
                                 Text("Fantasy/Fitness")
                                     .font(.custom("PTSans-Narrow", size: 25))
@@ -186,7 +184,7 @@ struct DataView: View {
                         .overlay(
                             // Add the thin black border
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(.black, lineWidth: 2)
+                                .stroke(.black, lineWidth: 8)
                         )
                 )
                 .background(
@@ -195,7 +193,7 @@ struct DataView: View {
                             .fill(.black)
                     }
                     // The magic offsets:
-                        .offset(x: 0, y: 4)  // Slightly right, heavily down
+                        .offset(x: 0, y: 6)  // Slightly right, heavily down
                         .scaleEffect(x: 0.99, y: 1.0)
                 )
                 .padding(.top, 10)
@@ -215,7 +213,7 @@ struct DataView: View {
             }
             
         }
-        .background(.gray)
+        .background(.backgroundTheme)
         .cornerRadius(10)
         .containerRelativeFrame(.horizontal) { length, axis in
             return length * 0.94
@@ -227,7 +225,7 @@ struct DataView: View {
         .background(
             // --- Top Layer: The button itself ---
             RoundedRectangle(cornerRadius: 10)
-                .fill(.gray)
+                .fill(.backgroundTheme)
                 .overlay(
                     // Add the thin black border
                     RoundedRectangle(cornerRadius: 10)
