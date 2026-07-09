@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+@MainActor
 struct MovieListView: View {
     @StateObject private var viewModel = MovieListViewModel()
+    @State private var isShowingSheet: Bool = true
     @State var searchString: String = ""
 
     func getMovieCountWithFilter() -> Int {
@@ -52,8 +54,6 @@ struct MovieListView: View {
             .containerRelativeFrame(.horizontal) { length, axis in
                 return length * 0.90
             }
-            //.background(.backgroundTheme)
-            
             .background(
                 // --- Top Layer: The button itself ---
                 RoundedRectangle(cornerRadius: 25)
@@ -65,25 +65,24 @@ struct MovieListView: View {
                     )
             )
             .padding(.top, 20)
-//            .background(
-//                ZStack {
-//                    RoundedRectangle(cornerRadius: 30)
-//                        .fill(.black)
-//                }
-                // The magic offsets:
-//                    .offset(x: 0, y: 5)  // Slightly right, heavily down
-//                    .scaleEffect(x: 1.0, y: 1.0)
- //           )
-            HStack {
-                Text("Total Movies: \(getMovieCountWithFilter())")
-                    .padding(.leading, 20)
-                    .font(
-                        .custom("Poppins-Bold", size: 20)
-                    )
-                    .foregroundStyle(.blueButtonTheme)
-                Spacer()
+            
+            DisclosureGroup {
+                DataView(isShowingSheet: $isShowingSheet)
+            } label: {
+                HStack {
+                    Text("Total Movies: \(getMovieCountWithFilter())")
+                        .padding(.leading, 20)
+                        .font(
+                            .custom("Poppins-Bold", size: 25)
+                        )
+                        .foregroundStyle(.blueButtonTheme)
+                    Spacer()
+                }
+                .padding(.top, 5)
+
             }
-            .padding(.top, 5)
+            .padding(.trailing, 15)
+           
             Divider()
                 .frame(height: 3)
                 .overlay(.black)
@@ -105,11 +104,11 @@ struct MovieListView: View {
                 .clipped()
             }
             .containerRelativeFrame(.horizontal) { length, axis in
-                return length * 0.95
+                return length * 0.94
             }
             // height
             .containerRelativeFrame(.vertical) { length, axis in
-                return length * 0.65
+                return length * 0.73
             }
          
             .onAppear {
@@ -127,7 +126,7 @@ struct MovieListView: View {
                 .overlay(
                     // Add the thin black border
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(.black, lineWidth: 1)
+                        .stroke(.black, lineWidth: 3)
                 )
         )
         .background(
@@ -136,9 +135,13 @@ struct MovieListView: View {
                     .fill(.black)
             }
             // The magic offsets:
-                .offset(x: 0, y: 6)  // Slightly right, heavily down
-                .scaleEffect(x: 1.0, y: 1.0)
+                .offset(x: 0, y: 4)  // Slightly right, heavily down
+                .scaleEffect(x: 0.99, y: 1.0)
         )
+        .padding(5)
+        .onAppear {
+            isShowingSheet = false
+        }
     }
 }
 

@@ -52,9 +52,10 @@ struct MovieView: View {
                                         .fill(.black)
                                 }
                                 // The magic offsets:
-                                    .offset(x: 0, y: 4)  // Slightly right, heavily down
+                                    .offset(x: 0, y: 2)  // Slightly right, heavily down
                                     .scaleEffect(x: 1.0, y: 1.0)
                             )
+                            .padding(.top, 3)
                         }
                         .padding(.trailing, 5)
                         .padding(.bottom, 5)
@@ -68,7 +69,7 @@ struct MovieView: View {
                     ZStack {
                         Image(systemName: "folder.fill")
                             .foregroundStyle(.blueButtonTheme)
-                            .font(.system(size: 30))
+                            .font(.system(size: 35))
                         Text("\(movie.folder)\(movie.location)")
                             .font(.custom("PTSans-Narrow", size: 15))
                             .padding(.horizontal, 10)

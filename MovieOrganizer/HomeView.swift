@@ -15,11 +15,6 @@ struct HomeView: View {
     @State private var showRandomlyChosenMovie: Bool = false
     @State private var randomMovie: String =
         "Chronicles of Narnia The Lion, The Witch, and the Wardrobe disc 1"
-    
-    @State private var jumpOffset: CGFloat = 0    // Controls the upward movement
-    @State private var jumpRotation: Angle = .zero
-        private let jumpHeight: CGFloat = -5 // Negative goes UP
-        private let runLeanAngle = 0.0
 
     func getIcon() -> String {
 
@@ -60,7 +55,7 @@ struct HomeView: View {
                         VStack {
                             Button(action: {
                                 withAnimation(
-                                    .smooth(duration: 0.3, extraBounce: 0.4)
+                                    .smooth(duration: 0.3)
                                 ) {
                                     //tab = "settings"
                                     //  xOffset = 116
@@ -101,7 +96,7 @@ struct HomeView: View {
                         VStack {
                             Button(action: {
                                 withAnimation(
-                                    .smooth(duration: 0.6, extraBounce: 0.4)
+                                    .smooth(duration: 0.6)
                                 ) {
                                     showShuffle.toggle()
                                     randomGenre = ""
@@ -152,10 +147,12 @@ struct HomeView: View {
                 VStack {
                     if tab == "home" {
                         Spacer()
-                        MovieListView()
+                        ScrollView {
+                            MovieListView()
+                        }
                         Spacer()
                     } else if tab == "chart" {
-                        DataView()
+                      //  DataView()
                     } else if tab == "settings" {
                         SettingsView()
                     }
@@ -371,34 +368,12 @@ struct HomeView: View {
                         .offset(y: randomGenre != "" ? -5 : -5)
                     }
                 }
-                //                .background(
-                //                    // --- Top Layer: The button itself ---
-                //                    RoundedRectangle(cornerRadius: 15)
-                //                        .fill(.red.opacity(0.1))
-                //                        .overlay(
-                //                            // Add the thin black border
-                //                            RoundedRectangle(cornerRadius: 15)
-                //                                .stroke(.black, lineWidth: 2)
-                //                        )
-                //                )
-                //                .background(
-                //                    ZStack {
-                //                        RoundedRectangle(cornerRadius: 15)
-                //                            .fill(.black)
-                //                    }
-                //                    // The magic offsets:
-                //                    .offset(x: 0, y: 4)  // Slightly right, heavily down
-                //                    .scaleEffect(x: 0.99, y: 1.0)
-                //                )
-                //           .border(.white)
-                // .padding(.top, 20)
-
                 ZStack {
                     HStack {
                         HStack {
                             Button(action: {
                                 withAnimation(
-                                    .smooth(duration: 0.3, extraBounce: 0.4)
+                                    .smooth(duration: 0.3)
                                 ) {
                                     tab = "home"
                                     xOffset = -150
@@ -423,7 +398,7 @@ struct HomeView: View {
 
                             Button(action: {
                                 withAnimation(
-                                    .smooth(duration: 0.3, extraBounce: 0.4)
+                                    .smooth(duration: 0.3)
                                 ) {
                                     tab = "search"
                                     xOffset = -92
@@ -448,7 +423,7 @@ struct HomeView: View {
 
                             Button(action: {
                                 withAnimation(
-                                    .smooth(duration: 0.3, extraBounce: 0.4)
+                                    .smooth(duration: 0.3)
                                 ) {
                                     tab = "chart"
                                     xOffset = -35
@@ -473,7 +448,7 @@ struct HomeView: View {
 
                             Button(action: {
                                 withAnimation(
-                                    .smooth(duration: 0.3, extraBounce: 0.4)
+                                    .smooth(duration: 0.3)
                                 ) {
                                     tab = "history"
                                     xOffset = 25
@@ -504,7 +479,7 @@ struct HomeView: View {
 
                             Button(action: {
                                 withAnimation(
-                                    .smooth(duration: 0.3, extraBounce: 0.4)
+                                    .smooth(duration: 0.3)
                                 ) {
                                     tab = "settings"
                                     xOffset = 82
@@ -539,7 +514,7 @@ struct HomeView: View {
                                 .overlay(
                                     // Add the thin black border
                                     RoundedRectangle(cornerRadius: 20)
-                                        .stroke(.black, lineWidth: 1)
+                                        .stroke(.black, lineWidth: 2)
                                 )
                         )
                         .background(
@@ -554,7 +529,7 @@ struct HomeView: View {
                         VStack {
                             Button(action: {
                                 withAnimation(
-                                    .smooth(duration: 0.3, extraBounce: 0.4)
+                                    .smooth(duration: 0.3)
                                 ) {
                                     //tab = "settings"
                                     //  xOffset = 116
@@ -575,7 +550,7 @@ struct HomeView: View {
                         .background(.yellowTheme)
                         .clipShape(Capsule())
                         .background(
-                            RoundedRectangle(cornerRadius: 20)
+                            RoundedRectangle(cornerRadius: 30)
                                 .fill(.blueTheme)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 30)
@@ -588,15 +563,15 @@ struct HomeView: View {
                                     .fill(.black)
                             }
                             // The magic offsets:
-                            .offset(x: 0, y: 6)  // Slightly right, heavily down
-                                .scaleEffect(x: 1.0, y: 1.0)
+                            .offset(x: 0, y: 4)  // Slightly right, heavily down
+                                .scaleEffect(x: 0.99, y: 1.0)
                         )
                     }
 
                     ZStack {
                         Rectangle()
                             .fill(.yellowTheme)
-                            .frame(width: 40, height: 40)
+                            .frame(width: 45, height: 45)
                             .cornerRadius(15)
                             .background(
                                 // --- Top Layer: The button itself ---
@@ -623,42 +598,6 @@ struct HomeView: View {
 
                     }
                     .offset(x: CGFloat(xOffset))
-                    .offset(y: jumpOffset)
-                    .rotationEffect(jumpRotation, anchor: .bottom)
-                    .onChange(of: tab) { _, newValue in
-                                // When the tab is clicked, start the multi-stage animation sequence:
-                                
-                                // 1. Initial State: It's resting on the ground, leaning forward towards new spot.
-                                jumpOffset = 0
-                                
-                                // Dynamic lean: Negative rotation when moving towards positive X, Positive when moving negative X.
-                                // Example for Tab 0 -> Tab 1 (moving right): lean back (-leanValue), then lean forward (+leanValue).
-                                let targetLean: Double = (newValue > tab ? runLeanAngle : -runLeanAngle) * -1
-                                jumpRotation = Angle(degrees: targetLean)
-
-                                // --- STAGE 1: JUMPING UP ---
-                                // Use a powerful spring for the ascent. The 'lean' also resets during the rise.
-                                withAnimation(.spring(response: 0.1, dampingFraction: 0.9, blendDuration: 0.1)) {
-                                    jumpOffset = jumpHeight // It goes UP
-                                    jumpRotation = Angle(degrees: -3) // Straightens up during ascent
-                                }
-                                
-                                // --- STAGE 2: FALLING DOWN (The bounce effect) ---
-                                // Use a standard non-bouncy easing (like easeIn) for the descent, then a strong bounce when it hits the ground.
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { // Timing needs tuning based on Stage 1
-                                    withAnimation(.interpolatingSpring(stiffness: 100, damping: 9, initialVelocity: 5).delay(0.0)) {
-                                        jumpOffset = 0 // It hits the ground
-                                        
-                                        // Add some rotation logic back when landing? (e.g., slight backward lean on impact)
-                                        jumpRotation = Angle(degrees: (newValue > tab ? -runLeanAngle : runLeanAngle) * 0.5)
-                                    }
-                                }
-                                
-                                // The Horizontal Position animation happens automatically and smoothly because
-                                // `horizontalPosition(for:)` recalculates and the SwiftUI system handles the transition.
-                            }
-                    
-
                 }
 
             }
@@ -704,25 +643,6 @@ struct HomeView: View {
                                     .font(.custom("PTSans-Narrow", size: 25))
                                     .foregroundStyle(.seafoamBlue)
                             }
-                            //                            .background(
-                            //                                // --- Top Layer: The button itself ---
-                            //                                RoundedRectangle(cornerRadius: 30)
-                            //                                    .fill(.seafoamBlue)
-                            //                                    .overlay(
-                            //                                        // Add the thin black border
-                            //                                        RoundedRectangle(cornerRadius: 30)
-                            //                                            .stroke(.black, lineWidth: 2)
-                            //                                    )
-                            //                            )
-                            //                            .background(
-                            //                                ZStack {
-                            //                                    RoundedRectangle(cornerRadius: 30)
-                            //                                        .fill(.black)
-                            //                                }
-                            //                                // The magic offsets:
-                            //                                .offset(x: 0, y: 4)  // Slightly right, heavily down
-                            //                                .scaleEffect(x: 0.99, y: 1.0)
-                            //                            )
                         }
                         .padding(.top, 30)
                         .padding(.bottom, 15)
@@ -731,10 +651,6 @@ struct HomeView: View {
                     .containerRelativeFrame(.horizontal) { length, axis in
                         return length * 0.9
                     }
-                    //                    // height
-                    //                    .containerRelativeFrame(.vertical) { length, axis in
-                    //                        return length * 0.2
-                    //                    }
                     .background(.blueTheme)
                     .cornerRadius(10)
                     .shadow(
@@ -760,35 +676,3 @@ struct HomeView: View {
 #Preview {
     HomeView()
 }
-
-//            Button(action: {
-//                        print("Button Tapped!")
-//                    }) {
-//                        Text("Small Change")
-//                            .font(.system(size: 22, weight: .bold))
-//                            .foregroundColor(.black) // Match text to border
-//                            .padding(.vertical, 10)
-//                            .padding(.horizontal, 32)
-//                            // Use a flexible frame to fit the content
-//                            .frame(minWidth: 200)
-//                            .background(
-//                                // --- Top Layer: The button itself ---
-//                                RoundedRectangle(cornerRadius: 30)
-//                                    .fill(.seafoamBlue)
-//                                    .overlay(
-//                                        // Add the thin black border
-//                                        RoundedRectangle(cornerRadius: 30)
-//                                            .stroke(.black, lineWidth: 2)
-//                                    )
-//                            )
-//                            .background(
-//                                ZStack {
-//                                    RoundedRectangle(cornerRadius: 30)
-//                                        .fill(.black)
-//                                }
-//                                // The magic offsets:
-//                                .offset(x: 0, y: 4) // Slightly right, heavily down
-//                                .scaleEffect(x: 0.99, y: 1.0)
-//                            )
-//                    }
-//                    .padding()
