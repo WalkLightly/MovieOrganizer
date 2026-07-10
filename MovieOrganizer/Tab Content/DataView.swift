@@ -266,24 +266,6 @@ struct DataView: View {
             .containerRelativeFrame(.vertical) { length, axis in
                 return length * 0.6
             }
-            //        .background(
-            //            // --- Top Layer: The button itself ---
-            //            RoundedRectangle(cornerRadius: 10)
-            //                .fill(.backgroundTheme)
-            //                .overlay(
-            //                    // Add the thin black border
-            //                    RoundedRectangle(cornerRadius: 10)
-            //                        .stroke(.black, lineWidth: 2)
-            //                )
-            //        )
-            //        .background(
-            //            ZStack {
-            //                RoundedRectangle(cornerRadius: 10)
-            //                    .fill(.black)
-            //            }
-            //                .offset(x: 0, y: 4)
-            //                .scaleEffect(x: 0.99, y: 1.0)
-            //        )
             
             .sheet(isPresented: $isShowingSheet) {
                 [isShowingSheet] in

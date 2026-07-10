@@ -20,7 +20,7 @@ struct MovieView: View {
                     .foregroundStyle(.blueTheme)
                     .padding(.leading, 10)
                     .padding(.bottom, 8)
-                    .padding(.top, -5)
+                   // .padding(.top, -15)
                 Spacer()
             }
             HStack {
@@ -82,7 +82,7 @@ struct MovieView: View {
                 
             }
             .padding(.leading, 10)
-            .padding(.bottom, 10)
+            .padding(.bottom, 5)
             .padding(.top, -10)
         }
         .overlay(

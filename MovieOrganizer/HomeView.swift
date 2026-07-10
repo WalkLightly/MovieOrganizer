@@ -146,17 +146,17 @@ struct HomeView: View {
                 // MAIN VIEW
                 VStack {
                     if tab == "home" {
-                        Spacer()
-                        ScrollView {
+//                        Spacer()
+                     //  ScrollView {
                             MovieListView()
-                        }
-                        Spacer()
+                   //    }
+                       // Spacer()
                     } else if tab == "chart" {
                       //  DataView()
                     } else if tab == "settings" {
                         SettingsView()
                     }
-
+                    Spacer()
                 }
 
                 // width
@@ -165,7 +165,7 @@ struct HomeView: View {
                 }
                 // height
                 .containerRelativeFrame(.vertical) { length, axis in
-                    return length * 0.85
+                    return length * 0.80
                 }
                 .overlay(alignment: .topTrailing) {
                     if showShuffle {

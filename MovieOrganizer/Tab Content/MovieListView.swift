@@ -88,28 +88,44 @@ struct MovieListView: View {
                 .overlay(.black)
                 .padding(.top, -5)
             VStack {
-                ScrollView {
-                    ForEach(viewModel.movies, id: \.id) { movie in
+               // ScrollView {
+                    List(viewModel.movies, id: \.id) { movie in
                         if searchString == "" ||
                             movie.name.lowercased().contains(searchString.lowercased()) ||
                             movie.genres.contains(searchString)
                         {
                             MovieView(movie: movie)
+                                .listRowBackground(Color.backgroundTheme)
+                                .listRowSeparator(.hidden)
+                                .listRowInsets(EdgeInsets())
+                                .padding(.bottom, 10)
+
                         }
                     }
+                    .padding(.bottom, 5)
+                    //.padding(.top, -10)
+                    .scrollContentBackground(.hidden)
+                    .refreshable {
+                        Task {
+                            try await viewModel.getAllMovies()
+                        }
+                    }
+                    .listRowSpacing(0)
+
                     
-                }
-                .padding(.bottom, 5)
-                .padding(.top, 10)
-                .clipped()
+//                }
+//                .padding(.bottom, 5)
+//                .padding(.top, 10)
+//                .clipped()
             }
             .containerRelativeFrame(.horizontal) { length, axis in
                 return length * 0.94
             }
+            .frame(maxHeight: .infinity)
             // height
-            .containerRelativeFrame(.vertical) { length, axis in
-                return length * 0.73
-            }
+//            .containerRelativeFrame(.vertical) { length, axis in
+//                return length * 0.73
+//            }
          
             .onAppear {
                 Task {
@@ -118,6 +134,9 @@ struct MovieListView: View {
             }
             .padding(.top, -10)
         }
+//        .containerRelativeFrame(.vertical) { length, axis in
+//            return length * 0.77
+//        }
         .cornerRadius(20)
         .background(
             // --- Top Layer: The button itself ---
@@ -142,6 +161,7 @@ struct MovieListView: View {
         .onAppear {
             isShowingSheet = false
         }
+        Spacer()
     }
 }
 
