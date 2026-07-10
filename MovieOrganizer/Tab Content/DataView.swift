@@ -257,10 +257,10 @@ struct DataView: View {
                 
             }
             .background(.backgroundTheme)
-            .padding(.trailing, 3)
+            .padding(.leading, 2)
             .cornerRadius(10)
             .containerRelativeFrame(.horizontal) { length, axis in
-                return length * 0.92
+                return length * 0.85
             }
             // height
             .containerRelativeFrame(.vertical) { length, axis in

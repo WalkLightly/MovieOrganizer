@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var tab: String = "home"
-    @State private var xOffset = -150
+    @State private var xOffset = -145
     @State private var showShuffle: Bool = false
     @State private var randomGenre: String = ""
     @State private var showRandomlyChosenMovie: Bool = false
@@ -140,7 +140,7 @@ struct HomeView: View {
                         return length * 0.95
                     }
                 }
-                .padding(.top, 40)
+                .padding(.top, 60)
                 .frame(width: 700, height: 100)
 
                 // MAIN VIEW
@@ -158,6 +158,7 @@ struct HomeView: View {
                     }
                     Spacer()
                 }
+                .padding(.top, 20)
 
                 // width
                 .containerRelativeFrame(.horizontal) { length, axis in
@@ -165,7 +166,7 @@ struct HomeView: View {
                 }
                 // height
                 .containerRelativeFrame(.vertical) { length, axis in
-                    return length * 0.80
+                    return length * 0.82
                 }
                 .overlay(alignment: .topTrailing) {
                     if showShuffle {
@@ -365,18 +366,19 @@ struct HomeView: View {
                             .scaleEffect(x: 0.99, y: 1.0)
                         )
 
-                        .offset(y: randomGenre != "" ? -5 : -5)
+                        .offset(y: randomGenre != "" ? -5 : 0)
                     }
                 }
+                Spacer()
                 ZStack {
                     HStack {
                         HStack {
                             Button(action: {
                                 withAnimation(
-                                    .smooth(duration: 0.3)
+                                    .smooth(duration: 0.3, extraBounce: 0.3)
                                 ) {
                                     tab = "home"
-                                    xOffset = -150
+                                    xOffset = -145
                                 }
                             }) {
                                 if tab == "home" {
@@ -398,10 +400,10 @@ struct HomeView: View {
 
                             Button(action: {
                                 withAnimation(
-                                    .smooth(duration: 0.3)
+                                    .smooth(duration: 0.3, extraBounce: 0.3)
                                 ) {
                                     tab = "search"
-                                    xOffset = -92
+                                    xOffset = -87
                                 }
                             }) {
                                 if tab == "search" {
@@ -423,10 +425,10 @@ struct HomeView: View {
 
                             Button(action: {
                                 withAnimation(
-                                    .smooth(duration: 0.3)
+                                    .smooth(duration: 0.3, extraBounce: 0.3)
                                 ) {
                                     tab = "chart"
-                                    xOffset = -35
+                                    xOffset = -30
                                 }
                             }) {
                                 if tab == "chart" {
@@ -448,10 +450,10 @@ struct HomeView: View {
 
                             Button(action: {
                                 withAnimation(
-                                    .smooth(duration: 0.3)
+                                    .smooth(duration: 0.3, extraBounce: 0.3)
                                 ) {
                                     tab = "history"
-                                    xOffset = 25
+                                    xOffset = 30
                                 }
                             }) {
                                 if tab == "history" {
@@ -479,10 +481,10 @@ struct HomeView: View {
 
                             Button(action: {
                                 withAnimation(
-                                    .smooth(duration: 0.3)
+                                    .smooth(duration: 0.3, extraBounce: 0.3)
                                 ) {
                                     tab = "settings"
-                                    xOffset = 82
+                                    xOffset = 87
                                 }
                             }) {
                                 if tab == "settings" {

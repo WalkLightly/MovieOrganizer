@@ -67,7 +67,11 @@ struct MovieListView: View {
             .padding(.top, 20)
             
             DisclosureGroup {
-                DataView(isShowingSheet: $isShowingSheet)
+                HStack {
+                    Spacer()
+                    DataView(isShowingSheet: $isShowingSheet)
+                    Spacer()
+                }
             } label: {
                 HStack {
                     Text("Total Movies: \(getMovieCountWithFilter())")
@@ -129,7 +133,7 @@ struct MovieListView: View {
          
             .onAppear {
                 Task {
-                    try await viewModel.getAllMovies()
+                //    try await viewModel.getAllMovies()
                 }
             }
             .padding(.top, -10)
