@@ -18,7 +18,8 @@ struct MovieListView: View {
             return viewModel.movies.count
         } else {
             return viewModel.movies.filter { movie in
-                movie.name.lowercased().contains(searchString.lowercased())
+                movie.name.lowercased().contains(searchString.lowercased()) ||
+                movie.genres.contains(searchString)
             }.count
         }
     }
@@ -115,32 +116,19 @@ struct MovieListView: View {
                         }
                     }
                     .listRowSpacing(0)
-
-                    
-//                }
-//                .padding(.bottom, 5)
-//                .padding(.top, 10)
-//                .clipped()
             }
             .containerRelativeFrame(.horizontal) { length, axis in
                 return length * 0.94
             }
             .frame(maxHeight: .infinity)
-            // height
-//            .containerRelativeFrame(.vertical) { length, axis in
-//                return length * 0.73
-//            }
-         
             .onAppear {
                 Task {
-                //    try await viewModel.getAllMovies()
+                    try await viewModel.getAllMovies()
                 }
             }
             .padding(.top, -10)
+
         }
-//        .containerRelativeFrame(.vertical) { length, axis in
-//            return length * 0.77
-//        }
         .cornerRadius(20)
         .background(
             // --- Top Layer: The button itself ---

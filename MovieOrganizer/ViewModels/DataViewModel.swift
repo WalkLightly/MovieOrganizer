@@ -19,8 +19,8 @@ class DataViewModel: ObservableObject {
     }
     
     func getGenresForBreakdown() async throws -> Void {
-        self.isLoadingGenres = true
         
+        self.isLoadingGenres = true
         do {
             self.genres = try await SettingsAPI.shared.getAllGenres()
             

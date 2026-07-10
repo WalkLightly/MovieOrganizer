@@ -13,8 +13,17 @@ struct HomeView: View {
     @State private var showShuffle: Bool = false
     @State private var randomGenre: String = ""
     @State private var showRandomlyChosenMovie: Bool = false
-    @State private var randomMovie: String =
-        "Chronicles of Narnia The Lion, The Witch, and the Wardrobe disc 1"
+    @State private var randomMovie: String = ""
+    
+    @StateObject private var settingsViewModel = SettingsViewModel()
+    
+    func filteredMoviesByGenre() -> Genre {
+        settingsViewModel.genres.first(where: { $0.name == randomGenre }) ?? Genre(id: "", name: "LDS", abbreviation: "", movies: [])
+    }
+    
+    func getSlotOptions() -> [String] {
+        return settingsViewModel.genres.map(\.name)
+    }
 
     func getIcon() -> String {
 
@@ -37,7 +46,18 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             Color(.blueTheme).ignoresSafeArea()
-
+            Rectangle()
+                .fill(
+                    LinearGradient(
+                        colors: [.black.opacity(0.9), .blueTheme],
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                )
+                .frame(width: 400, height: 4000)
+                .cornerRadius(20)
+                .rotationEffect(.degrees(90))
+                .offset(x: -200, y: -350)
             VStack {
                 HStack {
                     HStack {
@@ -58,7 +78,7 @@ struct HomeView: View {
                                     .smooth(duration: 0.3)
                                 ) {
                                     //tab = "settings"
-                                    //  xOffset = 116
+                                    //  xOffset = 116LD
                                 }
                             }) {
                                 Image(
@@ -146,11 +166,7 @@ struct HomeView: View {
                 // MAIN VIEW
                 VStack {
                     if tab == "home" {
-//                        Spacer()
-                     //  ScrollView {
                             MovieListView()
-                   //    }
-                       // Spacer()
                     } else if tab == "chart" {
                       //  DataView()
                     } else if tab == "settings" {
@@ -226,7 +242,7 @@ struct HomeView: View {
                                         .foregroundStyle(.white)
                                         .padding(.horizontal, 10)
                                     Button {
-                                        randomGenre = "Christmas"
+                                        randomGenre = settingsViewModel.genres.randomElement()?.name ?? ""
                                     } label: {
                                         Text("Random Genre")
                                             .font(
@@ -270,7 +286,7 @@ struct HomeView: View {
                                         .overlay(.white)
                                         .padding(.trailing, 20)
                                         .padding(.vertical, 20)
-
+                                    
                                     HStack {
                                         Text(randomGenre)
                                             .font(
@@ -282,18 +298,33 @@ struct HomeView: View {
                                             .foregroundStyle(.yellowTheme)
                                         Spacer()
                                     }
-
                                     HStack {
-                                        VStack {
-
+                                        ScrollView {
+                                            VStack {
+                                                ForEach(filteredMoviesByGenre().movies, id: \.self) {
+                                                    gen in
+                                                    HStack {
+                                                        Text(gen)
+                                                            .font(
+                                                                .custom("PTSans-Narrow", size: 25)
+                                                            )
+                                                            .padding(.bottom, 5)
+                                                        Spacer()
+                                                    }
+                                                }
+                                            }
+                                            
+                                            .padding(10)
                                         }
                                         .frame(width: 300, height: 200)
-                                        .border(.white)
+                                        .background(.black.opacity(0.3))
+                                        .cornerRadius(10)
                                         Spacer()
                                     }
                                     HStack {
                                         Button {
-                                            //randomGenre = "Christmas"
+                                            randomMovie = filteredMoviesByGenre().movies.randomElement() ?? "Nothing Found"
+                                            showRandomlyChosenMovie = true
                                         } label: {
                                             Text("Random From List")
                                                 .font(
@@ -366,7 +397,7 @@ struct HomeView: View {
                             .scaleEffect(x: 0.99, y: 1.0)
                         )
 
-                        .offset(y: randomGenre != "" ? -5 : 0)
+                        .offset(y: randomGenre != "" ? 0 : 0)
                     }
                 }
                 Spacer()
@@ -617,24 +648,28 @@ struct HomeView: View {
             if showRandomlyChosenMovie {
                 VStack {
                     VStack {
-                        Text(randomMovie)
-                            .font(.custom("PTSans-Narrow", size: 30))
-                            .padding(.horizontal, 10)
-                            .padding(.top, 10)
-                            .foregroundStyle(.yellowTheme)
                         HStack {
+                            Spacer()
+                            Text(randomMovie)
+                                .font(.custom("PTSans-Narrow", size: 40))
+                                //.padding(.horizontal, 10)
+                                .padding(.top, 10)
+                                .foregroundStyle(.yellowTheme)
+                            Spacer()
+                        }
+                        HStack {
+                            Spacer()
                             ZStack {
                                 Image(systemName: "folder.fill")
                                     .foregroundStyle(.blueButtonTheme)
-                                    .font(.system(size: 70))
+                                    .font(.system(size: 140))
                                 Text("B12")
-                                    .font(.custom("PTSans-Narrow", size: 30))
+                                    .font(.custom("PTSans-Narrow", size: 60))
                                     .padding(.horizontal, 10)
                                     .foregroundStyle(.white)
                             }
                             Spacer()
                         }
-                        .padding(.leading, 10)
 
                         HStack {
                             Spacer()
@@ -645,8 +680,16 @@ struct HomeView: View {
                                     .font(.custom("PTSans-Narrow", size: 25))
                                     .foregroundStyle(.seafoamBlue)
                             }
+                            Button {
+                                randomMovie = filteredMoviesByGenre().movies.randomElement() ?? "Nothing Found"
+                            } label: {
+                                Text("Choose Again")
+                                    .font(.custom("PTSans-Narrow", size: 25))
+                                    .foregroundStyle(.brown)
+                            }
+                            .padding(.leading, 20)
                         }
-                        .padding(.top, 30)
+                        .padding(.top, 15)
                         .padding(.bottom, 15)
                         .padding(.trailing, 20)
                     }
