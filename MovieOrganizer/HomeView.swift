@@ -49,7 +49,7 @@ struct HomeView: View {
             Rectangle()
                 .fill(
                     LinearGradient(
-                        colors: [.black.opacity(0.9), .blueTheme],
+                        colors: [.white, .blueTheme],
                         startPoint: .leading,
                         endPoint: .trailing
                     )
@@ -171,6 +171,8 @@ struct HomeView: View {
                       //  DataView()
                     } else if tab == "settings" {
                         SettingsView()
+                    } else if tab == "search" {
+                        ExplorerView()
                     }
                     Spacer()
                 }
@@ -459,7 +461,7 @@ struct HomeView: View {
                                     .smooth(duration: 0.3, extraBounce: 0.3)
                                 ) {
                                     tab = "chart"
-                                    xOffset = -30
+                                    xOffset = -29
                                 }
                             }) {
                                 if tab == "chart" {
@@ -484,7 +486,7 @@ struct HomeView: View {
                                     .smooth(duration: 0.3, extraBounce: 0.3)
                                 ) {
                                     tab = "history"
-                                    xOffset = 30
+                                    xOffset = 29
                                 }
                             }) {
                                 if tab == "history" {

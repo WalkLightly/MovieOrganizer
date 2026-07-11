@@ -43,36 +43,4 @@ class SettingsAPI {
         
         return genres
     }
-    
-//    func getAllFolders () async throws -> [Folder] {
-//        var movies: [Movie] = []
-//        
-//        do {
-//          let querySnapshot = try await db.collection("movies")
-//                .whereField("name", isNotEqualTo: "")
-//                .order(by: "name", descending: false).getDocuments()
-//            
-//          for document in querySnapshot.documents {
-//              let movieData = document.data()
-//              let movieName = movieData["name"] as? String ?? ""
-//              
-//              let movie = Movie(
-//                id: document.documentID,
-//                isCableRecording: movieData["isCableRecording"] as? Bool ?? false,
-//                name: movieName.trimmingCharacters(in: .whitespacesAndNewlines) == "" ? "Unassigned Spot" : movieName,
-//                genres: movieData["genres"] as? [String] ?? [],
-//                folder: movieData["folder"] as? String ?? "",
-//                location: movieData["location"] as? String ?? "",
-//                type: movieData["type"] as? String ?? "",
-//              )
-//              movies.append(movie)
-//          }
-//        } catch {
-//          print("Error getting documents: \(error)")
-//        }
-//        
-//        //print(movies)
-//        
-//        return movies
-//    }
 }

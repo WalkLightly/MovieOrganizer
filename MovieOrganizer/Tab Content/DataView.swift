@@ -87,11 +87,9 @@ struct DataView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(.black)
                         }
-                        // The magic offsets:
-                            .offset(x: 0, y: 5)  // Slightly right, heavily down
+                            .offset(x: 0, y: 5)
                             .scaleEffect(x: 1.0, y: 1.0)
                     )
-                    //   .shadow(color: Color.black.opacity(0.7), radius: 1, x: 2, y: 3)
                     
                     VStack {
                         if !viewModel.genres.isEmpty {
