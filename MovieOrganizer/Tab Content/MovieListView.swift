@@ -12,6 +12,8 @@ struct MovieListView: View {
     @StateObject private var viewModel = MovieListViewModel()
     @State private var isShowingSheet: Bool = true
     @State var searchString: String = ""
+    @FocusState private var isTextFieldFocused: Bool
+
 
     func getMovieCountWithFilter() -> Int {
         if searchString.isEmpty {
@@ -43,6 +45,8 @@ struct MovieListView: View {
                     }
                     .background(.backgroundTheme)
                     .foregroundStyle(.black)
+                    .focused($isTextFieldFocused)
+
                 Image(systemName: "xmark")
                     .font(.system(size: 25))
                     .foregroundStyle(.blueButtonTheme)
@@ -149,7 +153,8 @@ struct MovieListView: View {
                 .offset(x: 0, y: 4)  // Slightly right, heavily down
                 .scaleEffect(x: 0.99, y: 1.0)
         )
-        .padding(5)
+        //.padding(5)
+        .padding(.top, isTextFieldFocused ? 80 : 0)
         .onAppear {
             isShowingSheet = false
         }

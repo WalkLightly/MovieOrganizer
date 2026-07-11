@@ -18,6 +18,7 @@ class SettingsViewModel: ObservableObject {
     init () {
         Task {
             try await getAllGenres()
+            try await getAllFolders()
         }
     }
     
@@ -25,12 +26,24 @@ class SettingsViewModel: ObservableObject {
         
         self.isLoadingGenres = true
         do {
-            self.genres = try await SettingsAPI.shared.getAllGenres()
+            self.genres = try await SettingsAPI.shared.getAllGenresForSettings()
             
             self.genres.sort { $0.movies.count > $1.movies.count }
             self.isLoadingGenres = false
         } catch {
-            print("error found")
+            print("error found retrieving genres")
+        }
+    }
+    
+    func getAllFolders() async throws -> Void {
+        
+        self.isLoadingFolders = true
+        do {
+            self.folders = try await SettingsAPI.shared.getAllFoldersForSettings()
+            
+            self.isLoadingFolders = false
+        } catch {
+            print("error found retrieving genres")
         }
     }
 }

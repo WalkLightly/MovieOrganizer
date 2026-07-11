@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var tab: String = "home"
+    @State private var tab: String = "newItem"
+    @State private var newItem = "Movie"
     @State private var xOffset = -145
     @State private var showShuffle: Bool = false
     @State private var randomGenre: String = ""
@@ -166,13 +167,16 @@ struct HomeView: View {
                 // MAIN VIEW
                 VStack {
                     if tab == "home" {
-                            MovieListView()
+                        MovieListView()
                     } else if tab == "chart" {
                       //  DataView()
                     } else if tab == "settings" {
                         SettingsView()
                     } else if tab == "search" {
+                        Spacer()
                         ExplorerView()
+                    } else if tab == "newItem" {
+                        AddItem(chosenItem: newItem)
                     }
                     Spacer()
                 }
@@ -566,11 +570,10 @@ struct HomeView: View {
                                 withAnimation(
                                     .smooth(duration: 0.3)
                                 ) {
-                                    //tab = "settings"
-                                    //  xOffset = 116
+                                    tab = tab == "newItem" ? "home" : "newItem"
                                 }
                             }) {
-                                Image(systemName: "plus")
+                                Image(systemName: tab == "newItem" ? "xmark" : "plus")
                                     .font(.system(size: 20))
                                     .foregroundStyle(.blueTheme)
                             }
@@ -603,36 +606,95 @@ struct HomeView: View {
                         )
                     }
 
-                    ZStack {
-                        Rectangle()
-                            .fill(.yellowTheme)
-                            .frame(width: 45, height: 45)
-                            .cornerRadius(15)
+                    if tab != "newItem" {
+                        ZStack {
+                            Rectangle()
+                                .fill(.yellowTheme)
+                                .frame(width: 45, height: 45)
+                                .cornerRadius(15)
+                                .background(
+                                    // --- Top Layer: The button itself ---
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .fill(.yellowTheme)
+                                        .overlay(
+                                            // Add the thin black border
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .stroke(.black, lineWidth: 1)
+                                        )
+                                )
+                                .background(
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .fill(.black)
+                                    }
+                                    // The magic offsets:
+                                        .offset(x: 0, y: 3)  // Slightly right, heavily down
+                                        .scaleEffect(x: 1.0, y: 1.0)
+                                )
+                            Image(systemName: getIcon())
+                                .font(.system(size: 20))
+                                .foregroundStyle(.blueTheme)
+                            
+                        }
+                        .offset(x: CGFloat(xOffset))
+                    } else {
+                        ZStack {
+                            HStack {
+                                Text("Movie")
+                                    .font(.custom("Poppins-Bold", size: 20))
+                                    .foregroundStyle(newItem == "Movie" ? .white : .blueTheme)
+                                    .onTapGesture {
+                                        newItem = "Movie"
+                                    }
+                                    .sensoryFeedback(.impact(weight: .light), trigger: newItem)
+
+                                Spacer()
+                                Text("Genre")
+                                    .font(.custom("Poppins-Bold", size: 20))
+                                    .foregroundStyle(newItem == "Genre" ? .white : .blueTheme)
+                                    .onTapGesture {
+                                        newItem = "Genre"
+                                    }
+                                    .sensoryFeedback(.impact(weight: .light), trigger: newItem)
+
+                                Spacer()
+
+                                Text("Folder")
+                                    .font(.custom("Poppins-Bold", size: 20))
+                                    .foregroundStyle(newItem == "Folder" ? .white : .blueTheme)
+                                    .onTapGesture {
+                                        newItem = "Folder"
+                                    }
+                                    .sensoryFeedback(.impact(weight: .light), trigger: newItem)
+
+                            }
+                            .padding()
+                            .frame(width: 310, height: 55)
+                            // .background(.blueTheme)
+                            .cornerRadius(30)
                             .background(
                                 // --- Top Layer: The button itself ---
-                                RoundedRectangle(cornerRadius: 15)
+                                RoundedRectangle(cornerRadius: 20)
                                     .fill(.yellowTheme)
                                     .overlay(
                                         // Add the thin black border
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .stroke(.black, lineWidth: 1)
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(.black, lineWidth: 2)
                                     )
                             )
                             .background(
                                 ZStack {
-                                    RoundedRectangle(cornerRadius: 15)
+                                    RoundedRectangle(cornerRadius: 20)
                                         .fill(.black)
                                 }
                                 // The magic offsets:
-                                .offset(x: 0, y: 3)  // Slightly right, heavily down
+                                .offset(x: 0, y: 6)  // Slightly right, heavily down
                                 .scaleEffect(x: 1.0, y: 1.0)
                             )
-                        Image(systemName: getIcon())
-                            .font(.system(size: 20))
-                            .foregroundStyle(.blueTheme)
-
+                            
+                        }
+                       .offset(x: -30)
                     }
-                    .offset(x: CGFloat(xOffset))
                 }
 
             }
@@ -643,7 +705,7 @@ struct HomeView: View {
             }
             // height
             .containerRelativeFrame(.vertical) { length, axis in
-                return length * 1.05
+                return length * 1
             }
             
 

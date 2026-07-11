@@ -11,50 +11,6 @@ struct FolderLoc: Hashable {
     var id: String
     var name: String
 }
-//A       Action
-//B       don’t know what I had planned for that
-//C       Comedy
-//D       Drama
-//F        Fantasy/Fitness
-//H       Horror
-//L        LDS
-//M      Musical
-//R       Romance
-//S        Sci-Fi
-//HA     Halloween
-//TH     Thanksgiving
-//CM    Christmas
-
-var folders: [FolderLoc] = [
-    FolderLoc(id: "1", name: "A"),
-    FolderLoc(id: "2", name: "B"),
-    FolderLoc(id: "3", name: "C"),
-    FolderLoc(id: "4", name: "D"),
-    FolderLoc(id: "5", name: "E"),
-    FolderLoc(id: "6", name: "F"),
-]
-
-struct GenreLoc: Hashable {
-    var id: String
-    var name: String
-    var abbreviation: String
-}
-
-var genres: [GenreLoc] = [
-    GenreLoc(id: "7", name: "Action", abbreviation: "A"),
-    GenreLoc(id: "8", name: "Unknown", abbreviation: "B"),
-    GenreLoc(id: "9", name: "Comedy", abbreviation: "C"),
-    GenreLoc(id: "10", name: "Drama", abbreviation: "D"),
-    GenreLoc(id: "11", name: "Fantasy/Fitness", abbreviation: "F"),
-    GenreLoc(id: "12", name: "Horror", abbreviation: "H"),
-    GenreLoc(id: "13", name: "LDS", abbreviation: "L"),
-    GenreLoc(id: "14", name: "Musical", abbreviation: "M"),
-    GenreLoc(id: "15", name: "Romance", abbreviation: "R"),
-    GenreLoc(id: "16", name: "Sci-Fi", abbreviation: "S"),
-    GenreLoc(id: "17", name: "Halloween", abbreviation: "HA"),
-    GenreLoc(id: "18", name: "Thanksgiving", abbreviation: "TM"),
-    GenreLoc(id: "19", name: "Christmas", abbreviation: "CM"),
-]
 
 struct SettingsView: View {
 
@@ -62,7 +18,7 @@ struct SettingsView: View {
     @State var newFolderName: String = ""
     @State var newGenreName: String = ""
     @State var newGenreAbbreviation: String = ""
-
+    @StateObject private var viewModel = SettingsViewModel()
     @FocusState private var isTextFieldFocused: Bool
 
     var body: some View {
@@ -80,151 +36,155 @@ struct SettingsView: View {
                             Spacer()
                         }
                         ScrollView {
-                            ForEach(folders, id: \.self) { folder in
-                                HStack {
-                                    if editingId == folder.id {
-                                        VStack {
-                                            TextField("", text: $newFolderName)
-                                                .font(
-                                                    .custom(
-                                                        "PTSans-Narrow",
-                                                        size: 40
-                                                    )
-                                                )
-                                                .foregroundStyle(.white)
-                                                .padding(.leading, 10)
-                                                .padding(.vertical, 5)
-                                                .focused($isTextFieldFocused)
-
-                                        }
-                                        .frame(width: 160)
-                                        .background(.blueTheme)
-                                        .cornerRadius(10)
-
-                                    } else {
-                                        HStack {
-                                            Text(folder.name)
-                                                .font(
-                                                    .custom(
-                                                        "Poppins-Bold",
-                                                        size: 40
-                                                    )
-                                                )
-                                                .foregroundStyle(.black)
-                                                .padding(.leading, 10)
-                                                
-                                                
-                                            Spacer()
-                                        }
-                                        .frame(width: 160)
-                                        .onTapGesture {
-                                            editingId = folder.id
-                                            newFolderName = folder.name
-                                            isTextFieldFocused = true
-                                        }
-                                    }
-                                    Spacer()
+                            if !viewModel.folders.isEmpty {
+                                
+                                ForEach(viewModel.folders, id: \.self) { folder in
                                     HStack {
                                         if editingId == folder.id {
-                                            HStack {
-                                                Button {
-                                                    editingId = ""
-                                                } label: {
-                                                    Text("CANCEL")
-                                                        .font(
-                                                            .custom(
-                                                                "PTSans-Narrow",
-                                                                size: 18
-                                                            )
+                                            VStack {
+                                                TextField("", text: $newFolderName)
+                                                    .font(
+                                                        .custom(
+                                                            "PTSans-Narrow",
+                                                            size: 40
                                                         )
-
-                                                        .foregroundStyle(.black)
-                                                        .padding(
-                                                            .horizontal,
-                                                            10
-                                                        )
-                                                        .padding(.vertical, 5)
-                                                }
-                                                .frame(width: 80, height: 60)
-                                                .background(.yellowTheme)
-                                                .cornerRadius(10)
-                                                .background(
-                                                    RoundedRectangle(cornerRadius: 10)
-                                                        .fill(.seafoamBlue)
-                                                        .overlay(
-                                                            RoundedRectangle(cornerRadius: 10)
-                                                                .stroke(.black, lineWidth: 2)
-                                                        )
-                                                )
-                                                .background(
-                                                    ZStack {
-                                                        RoundedRectangle(cornerRadius: 10)
-                                                            .fill(.black)
-                                                    }
-                                                    .offset(x: 0, y: 3)
-                                                    .scaleEffect(x: 1.0, y: 1.0)
-                                                )
-
-                                                Button {
-
-                                                } label: {
-                                                    Text("SAVE")
-                                                        .font(
-                                                            .custom(
-                                                                "PTSans-Narrow",
-                                                                size: 18
-                                                            )
-                                                        )
-                                                        .foregroundStyle(.black)
-                                                        .padding(
-                                                            .horizontal,
-                                                            10
-                                                        )
-                                                        .padding(.vertical, 5)
-                                                }
-                                                .frame(width: 60, height: 60)
-                                                .background(.seafoamBlue)
-                                                .cornerRadius(10)
-                                                .background(
-                                                    RoundedRectangle(cornerRadius: 10)
-                                                        .fill(.seafoamBlue)
-                                                        .overlay(
-                                                            RoundedRectangle(cornerRadius: 10)
-                                                                .stroke(.black, lineWidth: 2)
-                                                        )
-                                                )
-                                                .background(
-                                                    ZStack {
-                                                        RoundedRectangle(cornerRadius: 10)
-                                                            .fill(.black)
-                                                    }
-                                                    .offset(x: 0, y: 3)
-                                                    .scaleEffect(x: 1.0, y: 1.0)
-                                                )
-
-                                            }
-                                            .padding(.trailing, 70)
-                                        } else {
-                                            Button {
-
-                                            } label: {
-                                                Image(systemName: "trash")
-                                                    .font(.system(size: 27))
-                                                    .foregroundStyle(
-                                                        .red.opacity(0.4)
                                                     )
-
+                                                    .foregroundStyle(.white)
+                                                    .padding(.leading, 10)
+                                                    .padding(.vertical, 5)
+                                                    .focused($isTextFieldFocused)
+                                                
                                             }
-                                            .shadow(color: Color.black.opacity(0.4), radius: 1, x: 2, y: 3)
+                                            .frame(width: 160)
+                                            .background(.blueTheme)
+                                            .cornerRadius(10)
+                                            
+                                        } else {
+                                            HStack {
+                                                Text(folder.name)
+                                                    .font(
+                                                        .custom(
+                                                            "Poppins-Bold",
+                                                            size: 40
+                                                        )
+                                                    )
+                                                    .foregroundStyle(.black)
+                                                    .padding(.leading, 10)
+                                                
+                                                
+                                                Spacer()
+                                            }
+                                            .frame(width: 160)
+                                            .onTapGesture {
+                                                editingId = folder.id
+                                                newFolderName = folder.name
+                                                isTextFieldFocused = true
+                                            }
                                         }
+                                        Spacer()
+                                        HStack {
+                                            if editingId == folder.id {
+                                                HStack {
+                                                    Button {
+                                                        editingId = ""
+                                                    } label: {
+                                                        Text("CANCEL")
+                                                            .font(
+                                                                .custom(
+                                                                    "PTSans-Narrow",
+                                                                    size: 18
+                                                                )
+                                                            )
+                                                        
+                                                            .foregroundStyle(.black)
+                                                            .padding(
+                                                                .horizontal,
+                                                                10
+                                                            )
+                                                            .padding(.vertical, 5)
+                                                    }
+                                                    .frame(width: 80, height: 60)
+                                                    .background(.yellowTheme)
+                                                    .cornerRadius(10)
+                                                    .background(
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(.seafoamBlue)
+                                                            .overlay(
+                                                                RoundedRectangle(cornerRadius: 10)
+                                                                    .stroke(.black, lineWidth: 2)
+                                                            )
+                                                    )
+                                                    .background(
+                                                        ZStack {
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .fill(.black)
+                                                        }
+                                                            .offset(x: 0, y: 3)
+                                                            .scaleEffect(x: 1.0, y: 1.0)
+                                                    )
+                                                    
+                                                    Button {
+                                                        
+                                                    } label: {
+                                                        Text("SAVE")
+                                                            .font(
+                                                                .custom(
+                                                                    "PTSans-Narrow",
+                                                                    size: 18
+                                                                )
+                                                            )
+                                                            .foregroundStyle(.black)
+                                                            .padding(
+                                                                .horizontal,
+                                                                10
+                                                            )
+                                                            .padding(.vertical, 5)
+                                                    }
+                                                    .frame(width: 60, height: 60)
+                                                    .background(.seafoamBlue)
+                                                    .cornerRadius(10)
+                                                    .background(
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(.seafoamBlue)
+                                                            .overlay(
+                                                                RoundedRectangle(cornerRadius: 10)
+                                                                    .stroke(.black, lineWidth: 2)
+                                                            )
+                                                    )
+                                                    .background(
+                                                        ZStack {
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .fill(.black)
+                                                        }
+                                                            .offset(x: 0, y: 3)
+                                                            .scaleEffect(x: 1.0, y: 1.0)
+                                                    )
+                                                    
+                                                }
+                                                .padding(.trailing, 70)
+                                            } else {
+                                                Button {
+                                                    
+                                                } label: {
+                                                    Image(systemName: "trash")
+                                                        .font(.system(size: 27))
+                                                        .foregroundStyle(
+                                                            .red.opacity(0.4)
+                                                        )
+                                                    
+                                                }
+                                                .shadow(color: Color.black.opacity(0.4), radius: 1, x: 2, y: 3)
+                                            }
+                                        }
+                                        .frame(width: 80)
                                     }
-                                    .frame(width: 80)
+                                    .overlay(alignment: .bottom) {
+                                        Rectangle()
+                                            .frame(height: 1) // This sets the thickness of your border
+                                            .foregroundColor(.black.opacity(0.1)) // This sets the border color
+                                    }
                                 }
-                                .overlay(alignment: .bottom) {
-                                    Rectangle()
-                                        .frame(height: 1) // This sets the thickness of your border
-                                        .foregroundColor(.black.opacity(0.1)) // This sets the border color
-                                }
+                                .ignoresSafeArea(.container, edges: .top)
                             }
                         }
                         .frame(height: 350)
@@ -269,193 +229,199 @@ struct SettingsView: View {
                             Spacer()
                         }
                         ScrollView {
-                            ForEach(genres, id: \.self) { genre in
-                                HStack {
-                                    if editingId == genre.id {
-                                        VStack {
-                                            VStack {
-                                                TextField(
+                           if !viewModel.genres.isEmpty {
+                               ForEach(viewModel.genres, id: \.self) { genre in
+                                   HStack {
+                                       if editingId == genre.id {
+                                           VStack {
+                                               VStack {
+                                                   TextField(
                                                     "",
                                                     text: $newGenreName
-                                                )
-                                                .font(
+                                                   )
+                                                   .font(
                                                     .custom(
                                                         "PTSans-Narrow",
                                                         size: 25
                                                     )
-                                                )
-                                                .foregroundStyle(.white)
-                                                .padding(.leading, 10)
-                                                .padding(.vertical, 5)
-                                                .focused($isTextFieldFocused)
-                                                .frame(width: 200)
-                                                .background(.blueTheme)
-                                                .cornerRadius(10)
-                                                TextField(
+                                                   )
+                                                   .foregroundStyle(.white)
+                                                   .padding(.leading, 10)
+                                                   .padding(.vertical, 5)
+                                                   .focused($isTextFieldFocused)
+                                                   .frame(width: 200)
+                                                   .background(.blueTheme)
+                                                   .cornerRadius(10)
+                                                   TextField(
                                                     "",
                                                     text: $newGenreAbbreviation
-                                                )
-                                                .font(
+                                                   )
+                                                   .font(
                                                     .custom(
                                                         "PTSans-Narrow",
                                                         size: 25
                                                     )
-                                                )
-                                                .foregroundStyle(.white)
-                                                .padding(.leading, 10)
-                                                .padding(.vertical, 5)
-                                                .focused($isTextFieldFocused)
-                                                .frame(width: 200)
-                                                .background(.blueTheme)
-                                                .cornerRadius(10)
-                                            }
-                                            .padding(8)
-                                        }
-                                        .background(.blueTheme.opacity(0.7))
-                                        .cornerRadius(15)
-                                    } else {
-                                        HStack {
-                                            VStack {
-                                                Text(genre.abbreviation)
-                                                    .font(
-                                                        .custom(
-                                                            "PTSans-Narrow",
-                                                            size: 25
-                                                        )
-                                                    )
-                                                    .foregroundStyle(.black)
-                                                    .padding(.horizontal, 10)
-                                                    .padding(.vertical, 5)
-                                            }
-                                            .background(.seafoamBlue)
-                                            .cornerRadius(10)
-                                            .padding(.bottom, 10)
-                                            HStack {
-                                                Text(genre.name)
-                                                    .font(
-                                                        .custom(
-                                                            "PTSans-Narrow",
-                                                            size: 25
-                                                        )
-                                                    )
-                                                    .foregroundStyle(.black)
-                                                 //   .padding(.leading, 10)
-                                                    .onTapGesture {
-                                                        editingId = genre.id
-                                                        newGenreName = genre.name
-                                                        newGenreAbbreviation = genre.abbreviation
-                                                        isTextFieldFocused = true
-                                                    }
-                                                Spacer()
-                                            }
+                                                   )
+                                                   .foregroundStyle(.white)
+                                                   .padding(.leading, 10)
+                                                   .padding(.vertical, 5)
+                                                   .focused($isTextFieldFocused)
+                                                   .frame(width: 200)
+                                                   .background(.blueTheme)
+                                                   .cornerRadius(10)
+                                               }
+                                               .padding(8)
+                                           }
+                                           .background(.blueTheme.opacity(0.7))
+                                           .cornerRadius(15)
+                                           .padding(.bottom, isTextFieldFocused && editingId == genre.id ? 80 : 0)
 
-                                        }
-                                        .frame(width: 200)
-                                       
-                                    }
-                                    //Spacer()
-                                    HStack {
-                                        if editingId == genre.id {
-                                            VStack {
-                                                Button {
-                                                    editingId = ""
-                                                } label: {
-                                                    Text("CANCEL")
-                                                        .font(
+                                       } else {
+                                           HStack {
+                                               VStack {
+                                                   Text(genre.abbreviation)
+                                                       .font(
+                                                        .custom(
+                                                            "PTSans-Narrow",
+                                                            size: 25
+                                                        )
+                                                       )
+                                                       .foregroundStyle(.black)
+                                                       .padding(.horizontal, 10)
+                                                       .padding(.vertical, 5)
+                                               }
+                                               .background(.seafoamBlue)
+                                               .cornerRadius(10)
+                                               .padding(.bottom, 10)
+                                               HStack {
+                                                   Text(genre.name)
+                                                       .font(
+                                                        .custom(
+                                                            "PTSans-Narrow",
+                                                            size: 25
+                                                        )
+                                                       )
+                                                       .foregroundStyle(.black)
+                                                   //   .padding(.leading, 10)
+                                                       .onTapGesture {
+                                                           editingId = genre.id
+                                                           newGenreName = genre.name
+                                                           newGenreAbbreviation = genre.abbreviation
+                                                           isTextFieldFocused = true
+                                                       }
+                                                   Spacer()
+                                               }
+                                               
+                                           }
+                                           .frame(width: 200)
+                                           
+                                       }
+                                       //Spacer()
+                                       HStack {
+                                           if editingId == genre.id {
+                                               VStack {
+                                                   Button {
+                                                       editingId = ""
+                                                   } label: {
+                                                       Text("CANCEL")
+                                                           .font(
                                                             .custom(
                                                                 "PTSans-Narrow",
                                                                 size: 18
                                                             )
-                                                        )
-
-                                                        .foregroundStyle(.black)
-                                                        .padding(
+                                                           )
+                                                       
+                                                           .foregroundStyle(.black)
+                                                           .padding(
                                                             .horizontal,
                                                             10
-                                                        )
-                                                        .padding(.vertical, 5)
-                                                }
-                                                .frame(width: 75, height: 50)
-                                                .background(.yellowTheme)
-                                                .cornerRadius(10)
-                                                .background(
+                                                           )
+                                                           .padding(.vertical, 5)
+                                                   }
+                                                   .frame(width: 75, height: 50)
+                                                   .background(.yellowTheme)
+                                                   .cornerRadius(10)
+                                                   .background(
                                                     RoundedRectangle(cornerRadius: 10)
                                                         .fill(.yellowTheme)
                                                         .overlay(
                                                             RoundedRectangle(cornerRadius: 10)
                                                                 .stroke(.black, lineWidth: 2)
                                                         )
-                                                )
-                                                .background(
+                                                   )
+                                                   .background(
                                                     ZStack {
                                                         RoundedRectangle(cornerRadius: 10)
                                                             .fill(.black)
                                                     }
-                                                    .offset(x: 0, y: 3)
-                                                    .scaleEffect(x: 1.0, y: 1.0)
-                                                )
-
-                                                Button {
-
-                                                } label: {
-                                                    Text("SAVE")
-                                                        .font(
+                                                        .offset(x: 0, y: 3)
+                                                        .scaleEffect(x: 1.0, y: 1.0)
+                                                   )
+                                                   
+                                                   Button {
+                                                       
+                                                   } label: {
+                                                       Text("SAVE")
+                                                           .font(
                                                             .custom(
                                                                 "PTSans-Narrow",
                                                                 size: 18
                                                             )
-                                                        )
-                                                        .foregroundStyle(.black)
-                                                        .padding(
+                                                           )
+                                                           .foregroundStyle(.black)
+                                                           .padding(
                                                             .horizontal,
                                                             10
-                                                        )
-                                                        .padding(.vertical, 5)
-                                                }
-                                                .frame(width: 75, height: 50)
-                                                .background(.seafoamBlue)
-                                                .cornerRadius(10)
-                                                .background(
+                                                           )
+                                                           .padding(.vertical, 5)
+                                                   }
+                                                   .frame(width: 75, height: 50)
+                                                   .background(.seafoamBlue)
+                                                   .cornerRadius(10)
+                                                   .background(
                                                     RoundedRectangle(cornerRadius: 10)
                                                         .fill(.seafoamBlue)
                                                         .overlay(
                                                             RoundedRectangle(cornerRadius: 10)
                                                                 .stroke(.black, lineWidth: 2)
                                                         )
-                                                )
-                                                .background(
+                                                   )
+                                                   .background(
                                                     ZStack {
                                                         RoundedRectangle(cornerRadius: 10)
                                                             .fill(.black)
                                                     }
-                                                    .offset(x: 0, y: 3)
-                                                    .scaleEffect(x: 1.0, y: 1.0)
-                                                )
+                                                        .offset(x: 0, y: 3)
+                                                        .scaleEffect(x: 1.0, y: 1.0)
+                                                   )
+                                                   
+                                               }
+                                               .padding(.bottom, isTextFieldFocused && editingId == genre.id ? 80 : 0)
 
-                                            }
-                                            //.padding(.trailing, 70)
-                                        } else {
-                                            Button {
-
-                                            } label: {
-                                                Image(systemName: "trash")
-                                                    .font(.system(size: 27))
-                                                    .foregroundStyle(
+                                               //.padding(.trailing, 70)
+                                           } else {
+                                               Button {
+                                                   
+                                               } label: {
+                                                   Image(systemName: "trash")
+                                                       .font(.system(size: 27))
+                                                       .foregroundStyle(
                                                         .red.opacity(0.4)
-                                                    )
-
-                                            }
-                                            .shadow(color: Color.black.opacity(0.4), radius: 1, x: 2, y: 3)
-
-                                        }
-                                    }
-                                    .frame(width: 80)
-                                }
-                                .overlay(alignment: .bottom) {
-                                    Rectangle()
-                                        .frame(height: 1) // This sets the thickness of your border
-                                        .foregroundColor(.black.opacity(0.1)) // This sets the border color
-                                }
+                                                       )
+                                                   
+                                               }
+                                               .shadow(color: Color.black.opacity(0.4), radius: 1, x: 2, y: 3)
+                                               
+                                           }
+                                       }
+                                       .frame(width: 80)
+                                   }
+                                   .overlay(alignment: .bottom) {
+                                       Rectangle()
+                                           .frame(height: 1) // This sets the thickness of your border
+                                           .foregroundColor(.black.opacity(0.1)) // This sets the border color
+                                   }
+                               }
                             }
                         }
                         .frame(height: 400)

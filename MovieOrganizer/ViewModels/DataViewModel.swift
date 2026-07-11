@@ -22,7 +22,7 @@ class DataViewModel: ObservableObject {
         
         self.isLoadingGenres = true
         do {
-            self.genres = try await SettingsAPI.shared.getAllGenres()
+            self.genres = try await SettingsAPI.shared.getAllGenresForBreakdown()
             
             self.genres.sort { $0.movies.count > $1.movies.count }
             self.isLoadingGenres = false

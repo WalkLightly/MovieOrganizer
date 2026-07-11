@@ -141,7 +141,7 @@ struct ExplorerView: View {
         }
         // height
         .containerRelativeFrame(.vertical) { length, axis in
-            return length * 0.8
+            return length * 0.75
         }
         .background(
             // --- Top Layer: The button itself ---
