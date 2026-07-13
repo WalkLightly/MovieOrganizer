@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var tab: String = "newItem"
+    @State private var tab: String = "home"
     @State private var newItem = "Movie"
     @State private var xOffset = -145
     @State private var showShuffle: Bool = false
@@ -176,7 +176,7 @@ struct HomeView: View {
                         Spacer()
                         ExplorerView()
                     } else if tab == "newItem" {
-                        AddItem(chosenItem: newItem)
+                        AddItem(chosenItem: $newItem)
                     }
                     Spacer()
                 }
@@ -571,6 +571,8 @@ struct HomeView: View {
                                     .smooth(duration: 0.3)
                                 ) {
                                     tab = tab == "newItem" ? "home" : "newItem"
+                                    newItem = "Movie"
+                                    xOffset = -145
                                 }
                             }) {
                                 Image(systemName: tab == "newItem" ? "xmark" : "plus")
@@ -644,16 +646,21 @@ struct HomeView: View {
                                     .font(.custom("Poppins-Bold", size: 20))
                                     .foregroundStyle(newItem == "Movie" ? .white : .blueTheme)
                                     .onTapGesture {
-                                        newItem = "Movie"
+                                        withAnimation(.smooth(duration: 0.5, extraBounce: 0.3)) {
+                                            newItem = "Movie"
+                                        }
                                     }
                                     .sensoryFeedback(.impact(weight: .light), trigger: newItem)
+
 
                                 Spacer()
                                 Text("Genre")
                                     .font(.custom("Poppins-Bold", size: 20))
                                     .foregroundStyle(newItem == "Genre" ? .white : .blueTheme)
                                     .onTapGesture {
-                                        newItem = "Genre"
+                                        withAnimation(.smooth(duration: 0.5, extraBounce: 0.3)) {
+                                            newItem = "Genre"
+                                        }
                                     }
                                     .sensoryFeedback(.impact(weight: .light), trigger: newItem)
 
@@ -663,13 +670,15 @@ struct HomeView: View {
                                     .font(.custom("Poppins-Bold", size: 20))
                                     .foregroundStyle(newItem == "Folder" ? .white : .blueTheme)
                                     .onTapGesture {
-                                        newItem = "Folder"
+                                        withAnimation(.smooth(duration: 0.5, extraBounce: 0.3)) {
+                                            newItem = "Folder"
+                                        }
                                     }
                                     .sensoryFeedback(.impact(weight: .light), trigger: newItem)
 
                             }
                             .padding()
-                            .frame(width: 310, height: 55)
+                            .frame(width: 300, height: 55)
                             // .background(.blueTheme)
                             .cornerRadius(30)
                             .background(

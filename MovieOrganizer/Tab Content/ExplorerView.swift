@@ -52,7 +52,7 @@ struct ExplorerView: View {
                     return length * 0.90
                 }
                 .containerRelativeFrame(.vertical) { length, axis in
-                    return length * 0.35
+                    return length * 0.28
                 }
                 .padding(.bottom, 10)
             }
@@ -141,7 +141,7 @@ struct ExplorerView: View {
         }
         // height
         .containerRelativeFrame(.vertical) { length, axis in
-            return length * 0.75
+            return length * 0.70
         }
         .background(
             // --- Top Layer: The button itself ---
