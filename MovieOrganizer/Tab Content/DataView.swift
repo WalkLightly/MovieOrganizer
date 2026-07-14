@@ -227,7 +227,7 @@ struct DataView: View {
                                 HStack {
                                     Text("\(genre.name)")
                                         .font(.custom("Poppins-Bold", size: 20))
-                                        .foregroundStyle(.blueTheme)
+                                        .foregroundStyle(.yellowTheme)
                                         .frame(width: 245, alignment: .leading)
                                         .onTapGesture {
                                             isShowingSheet = true
@@ -254,7 +254,7 @@ struct DataView: View {
                 }
                 
             }
-            .background(.backgroundTheme)
+            .background(.grayTheme)
             .padding(.leading, 2)
             .cornerRadius(10)
             .containerRelativeFrame(.horizontal) { length, axis in

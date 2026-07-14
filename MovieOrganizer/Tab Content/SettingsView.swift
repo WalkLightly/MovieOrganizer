@@ -200,7 +200,8 @@ struct SettingsView: View {
                 .background(
                     // --- Top Layer: The button itself ---
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(.backgroundTheme)
+                        .fill(.backgroundTheme.opacity(0.6))
+
                         .overlay(
                             // Add the thin black border
                             RoundedRectangle(cornerRadius: 10)
@@ -424,7 +425,7 @@ struct SettingsView: View {
                                }
                             }
                         }
-                        .frame(height: 400)
+                        .frame(height: 350)
                     } label: {
                         Text("Edit Genres")
                             .font(.custom("Poppins-Bold", size: 25))
@@ -437,7 +438,7 @@ struct SettingsView: View {
                 .background(
                     // --- Top Layer: The button itself ---
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(.backgroundTheme)
+                        .fill(.backgroundTheme.opacity(0.6))
                         .overlay(
                             // Add the thin black border
                             RoundedRectangle(cornerRadius: 10)
@@ -453,6 +454,8 @@ struct SettingsView: View {
                     .scaleEffect(x: 1.0, y: 1.0)
                 )
                 .padding(.top, 10)
+                .padding(.bottom, 15)
+                
                 //.cornerRadius(10)
                 //.background(.blueButtonTheme)
             }
@@ -474,7 +477,7 @@ struct SettingsView: View {
         .background(
             // --- Top Layer: The button itself ---
             RoundedRectangle(cornerRadius: 10)
-                .fill(.backgroundTheme)
+                .fill(.grayTheme)
                 .overlay(
                     // Add the thin black border
                     RoundedRectangle(cornerRadius: 10)

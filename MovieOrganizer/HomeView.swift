@@ -421,11 +421,11 @@ struct HomeView: View {
                                 if tab == "home" {
                                     Image(systemName: "house")
                                         .font(.system(size: 20))
-                                        .foregroundStyle(.blueTheme)
+                                        .foregroundStyle(.yellowTheme)
                                 } else {
                                     Image(systemName: "house")
                                         .font(.system(size: 20))
-                                        .foregroundStyle(.blueTheme)
+                                        .foregroundStyle(.white)
                                 }
                             }
                             .frame(width: 50, height: 40)
@@ -450,7 +450,7 @@ struct HomeView: View {
                                 } else {
                                     Image(systemName: "magnifyingglass")
                                         .font(.system(size: 20))
-                                        .foregroundStyle(.blueTheme)
+                                        .foregroundStyle(.white)
                                 }
                             }
                             .frame(width: 50, height: 40)
@@ -475,7 +475,7 @@ struct HomeView: View {
                                 } else {
                                     Image(systemName: "chart.bar.yaxis")
                                         .font(.system(size: 20))
-                                        .foregroundStyle(.blueTheme)
+                                        .foregroundStyle(.white)
                                 }
                             }
                             .frame(width: 50, height: 40)
@@ -506,7 +506,7 @@ struct HomeView: View {
                                             "clock.arrow.trianglehead.clockwise.rotate.90.path.dotted"
                                     )
                                     .font(.system(size: 20))
-                                    .foregroundStyle(.blueTheme)
+                                    .foregroundStyle(.white)
                                 }
                             }
                             .frame(width: 50, height: 40)
@@ -531,7 +531,7 @@ struct HomeView: View {
                                 } else {
                                     Image(systemName: "gear")
                                         .font(.system(size: 20))
-                                        .foregroundStyle(.blueTheme)
+                                        .foregroundStyle(.white)
                                 }
                             }
                             .frame(width: 50, height: 40)
@@ -549,7 +549,7 @@ struct HomeView: View {
                         .background(
                             // --- Top Layer: The button itself ---
                             RoundedRectangle(cornerRadius: 20)
-                                .fill(.backgroundTheme)
+                                .fill(.grayTheme)
                                 .overlay(
                                     // Add the thin black border
                                     RoundedRectangle(cornerRadius: 20)
@@ -567,27 +567,27 @@ struct HomeView: View {
                         )
                         VStack {
                             Button(action: {
-                                withAnimation(
-                                    .smooth(duration: 0.3)
-                                ) {
+                                    withAnimation(.interpolatingSpring(stiffness: 170, damping: 25)) {
                                     tab = tab == "newItem" ? "home" : "newItem"
                                     newItem = "Movie"
                                     xOffset = -145
                                 }
                             }) {
-                                Image(systemName: tab == "newItem" ? "xmark" : "plus")
-                                    .font(.system(size: 20))
-                                    .foregroundStyle(.blueTheme)
-                            }
-                            .frame(width: 50, height: 40)
-                            .cornerRadius(50)
-                            .sensoryFeedback(
-                                .impact(weight: .light),
-                                trigger: tab
-                            )
+                                Image(systemName: "plus")
+                                        .font(.system(size: 20))
+                                        .foregroundStyle(tab == "newItem" ? .black : .blueTheme)
+                                }
+                                .frame(width: 50, height: 40)
+                                .cornerRadius(50)
+                                .sensoryFeedback(
+                                    .impact(weight: .light),
+                                    trigger: tab
+                                )
+                                .rotationEffect(.degrees(tab == "newItem" ? 45 : 0))
+
                         }
                         .frame(width: 50, height: 50)
-                        .background(.yellowTheme)
+                        .background(tab == "newItem" ? .seafoamBlue : .yellowTheme)
                         .clipShape(Capsule())
                         .background(
                             RoundedRectangle(cornerRadius: 30)
@@ -611,7 +611,7 @@ struct HomeView: View {
                     if tab != "newItem" {
                         ZStack {
                             Rectangle()
-                                .fill(.yellowTheme)
+                                .fill(.blueTheme)
                                 .frame(width: 45, height: 45)
                                 .cornerRadius(15)
                                 .background(
@@ -635,7 +635,7 @@ struct HomeView: View {
                                 )
                             Image(systemName: getIcon())
                                 .font(.system(size: 20))
-                                .foregroundStyle(.blueTheme)
+                                .foregroundStyle(.yellowTheme)
                             
                         }
                         .offset(x: CGFloat(xOffset))
@@ -703,8 +703,14 @@ struct HomeView: View {
                             
                         }
                        .offset(x: -30)
+                       .transition(
+                        .move(edge: .leading).combined(with: .opacity)
+                       )
                     }
                 }
+                .transition(
+                 .move(edge: .trailing).combined(with: .opacity)
+                )
 
             }
             .padding(.top, -30)

@@ -110,11 +110,28 @@ struct ExplorerView: View {
                                 .foregroundStyle(.black)
                                 .padding(5)
                         }
-                        .background(.seafoamBlue)
                         .cornerRadius(10)
+                        .background(
+                            // --- Top Layer: The button itself ---
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(.seafoamBlue)
+                                .overlay(
+                                    // Add the thin black border
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(.black, lineWidth: 2)
+                                )
+                        )
+                        .background(
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(.black)
+                            }
+                                .offset(x: 0, y: 2)
+                                .scaleEffect(x: 0.99, y: 1.0)
+                        )
                         Text(fm.name)
                             .font(.custom("Inder-Regular", size: 18))
-                            .foregroundStyle(.black)
+                            .foregroundStyle(.white)
                         Spacer()
                     }
                     .padding(.leading, 10)
@@ -130,7 +147,7 @@ struct ExplorerView: View {
             .containerRelativeFrame(.vertical) { length, axis in
                 return length * 0.3
             }
-            .background(.grayTheme.opacity(0.2))
+            .background(.backgroundTheme.opacity(0.2))
             .cornerRadius(10)
 
             Spacer()
@@ -146,7 +163,7 @@ struct ExplorerView: View {
         .background(
             // --- Top Layer: The button itself ---
             RoundedRectangle(cornerRadius: 10)
-                .fill(.backgroundTheme)
+                .fill(.grayTheme)
                 .overlay(
                     // Add the thin black border
                     RoundedRectangle(cornerRadius: 10)

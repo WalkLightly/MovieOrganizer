@@ -17,7 +17,7 @@ class MovieListViewModel: ObservableObject {
         self.isLoadingMovies = true
         
         do {
-           // self.movies = try await MoviesAPI.shared.getAllMovies()
+            self.movies = try await MoviesAPI.shared.getAllMovies()
             self.isLoadingMovies = false
             
         } catch {

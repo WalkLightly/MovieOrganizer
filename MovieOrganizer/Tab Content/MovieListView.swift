@@ -30,11 +30,11 @@ struct MovieListView: View {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .font(.system(size: 20))
-                    .foregroundStyle(.blueButtonTheme)
+                    .foregroundStyle(.yellowTheme)
                 TextField(
                     "",
                     text: $searchString,
-                    prompt: Text("Search for a movie or genre...").foregroundStyle(.blueTheme.opacity(0.5))
+                    prompt: Text("Search for a movie or genre...").foregroundStyle(.white.opacity(0.5))
                 )
                     .frame(height: 30)
                     .font(
@@ -43,13 +43,13 @@ struct MovieListView: View {
                     .containerRelativeFrame(.horizontal) { length, axis in
                         return length * 0.67
                     }
-                    .background(.backgroundTheme)
-                    .foregroundStyle(.black)
+                    .background(.grayTheme)
+                    .foregroundStyle(.white)
                     .focused($isTextFieldFocused)
 
                 Image(systemName: "xmark")
                     .font(.system(size: 25))
-                    .foregroundStyle(.blueButtonTheme)
+                    .foregroundStyle(.yellowTheme)
                     .opacity(searchString == "" ? 0 : 1)
                     .onTapGesture {
                         searchString = ""
@@ -62,7 +62,7 @@ struct MovieListView: View {
             .background(
                 // --- Top Layer: The button itself ---
                 RoundedRectangle(cornerRadius: 25)
-                    .fill(.backgroundTheme)
+                    .fill(.grayTheme)
                     .overlay(
                         // Add the thin black border
                         RoundedRectangle(cornerRadius: 20)
@@ -104,7 +104,7 @@ struct MovieListView: View {
                             movie.genres.contains(searchString)
                         {
                             MovieView(movie: movie)
-                                .listRowBackground(Color.backgroundTheme)
+                                .listRowBackground(Color.grayTheme)
                                 .listRowSeparator(.hidden)
                                 .listRowInsets(EdgeInsets())
                                 .padding(.bottom, 10)
@@ -137,7 +137,7 @@ struct MovieListView: View {
         .background(
             // --- Top Layer: The button itself ---
             RoundedRectangle(cornerRadius: 20)
-                .fill(.backgroundTheme)
+                .fill(.grayTheme)
                 .overlay(
                     // Add the thin black border
                     RoundedRectangle(cornerRadius: 20)

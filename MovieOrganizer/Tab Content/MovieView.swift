@@ -17,7 +17,7 @@ struct MovieView: View {
                     .font(
                         .custom("PTSans-Narrow", size: 25)
                     )
-                    .foregroundStyle(.blueTheme)
+                    .foregroundStyle(.yellowTheme)
                     .padding(.leading, 10)
                     .padding(.bottom, 8)
                    // .padding(.top, -15)
@@ -87,7 +87,7 @@ struct MovieView: View {
         }
         .overlay(
             Rectangle()
-                .fill(.blueTheme)
+                .fill(.white)
                 .frame(height: 1), // Thickness of the border
             alignment: .bottom     // Pushes it to the very bottom
         )
