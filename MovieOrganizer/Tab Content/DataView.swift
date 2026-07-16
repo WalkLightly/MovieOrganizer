@@ -11,8 +11,8 @@ struct DataView: View {
     
     @StateObject private var viewModel = DataViewModel()
     @Binding var isShowingSheet: Bool
+    @Binding var movies: [Movie]
     @State private var previewGenres: [String] = []
-    
 
     var body: some View {
         ZStack {
@@ -21,6 +21,43 @@ struct DataView: View {
                     .frame(height: 2)
                     .overlay(.black)
                     .padding(.top, 2)
+                HStack {
+                    HStack {
+                        
+                        HStack (spacing: -5) {
+                            Text("VHS:")
+                                .font(.custom("Poppins-Bold", size: 20))
+                                .foregroundStyle(.black)
+                                .padding(.leading, 10)
+                            Text("\(movies.isEmpty ? "0" : String(movies.count { $0.type == "VHS"}))")
+                                .font(.custom("Poppins-Bold", size: 20))
+                                .foregroundStyle(.black)
+                                .padding(.leading, 10)
+                        }
+                        HStack (spacing: -5)  {
+                            Text("CDs: ")
+                                .font(.custom("Poppins-Bold", size: 20))
+                                .foregroundStyle(.black)
+                                .padding(.leading, 10)
+                            Text("\(movies.isEmpty ? "900" : String(movies.count { $0.type != "VHS"}))")
+                                .font(.custom("Poppins-Bold", size: 20))
+                                .foregroundStyle(.black)
+                                .padding(.leading, 10)
+                        }
+                        .padding(.trailing, 10)
+                        .padding(.vertical, 10)
+                    }
+                    .background(.backgroundTheme)
+                    .cornerRadius(5)
+                    .background(
+                        RoundedRectangle(cornerRadius: 5)
+                            .shadow(color: Color.black.opacity(0.4), radius: 1, x: 2, y: 1)
+
+                    )
+                    Spacer()
+                }
+               
+                
                 ScrollView {
                     HStack {
                         Text("Genre Breakdown")
@@ -72,6 +109,12 @@ struct DataView: View {
                         return length * 0.4
                     }
                     .cornerRadius(10)
+//                    .background(.blueTheme)
+//                    .background(
+//                        RoundedRectangle(cornerRadius: 5)
+//                            .shadow(color: Color.black.opacity(0.4), radius: 1, x: 2, y: 1)
+//
+//                    )
                     .background(
                         // --- Top Layer: The button itself ---
                         RoundedRectangle(cornerRadius: 10)
@@ -287,5 +330,5 @@ struct DataView: View {
 }
 
 #Preview {
-    DataView(isShowingSheet: .constant(false))
+    DataView(isShowingSheet: .constant(false), movies: .constant([]))
 }

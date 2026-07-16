@@ -25,6 +25,7 @@ struct MovieListView: View {
             }.count
         }
     }
+    
     var body: some View {
         VStack {
             HStack {
@@ -74,7 +75,7 @@ struct MovieListView: View {
             DisclosureGroup {
                 HStack {
                     Spacer()
-                    DataView(isShowingSheet: $isShowingSheet)
+                    DataView(isShowingSheet: $isShowingSheet, movies: $viewModel.movies)
                     Spacer()
                 }
             } label: {
