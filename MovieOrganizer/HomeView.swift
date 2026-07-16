@@ -199,7 +199,7 @@ struct HomeView: View {
                                         .font(
                                             .custom("PTSans-Narrow", size: 40)
                                         )
-                                        .foregroundStyle(.yellowTheme)
+                                        .foregroundStyle(.black)
                                     Spacer()
                                 }
                                 .padding(.top, 10)
@@ -222,23 +222,23 @@ struct HomeView: View {
 
                                     .background(
                                         // --- Top Layer: The button itself ---
-                                        RoundedRectangle(cornerRadius: 15)
+                                        RoundedRectangle(cornerRadius: 10)
                                             .fill(.blueButtonTheme)
                                             .overlay(
                                                 // Add the thin black border
                                                 RoundedRectangle(
-                                                    cornerRadius: 15
+                                                    cornerRadius: 10
                                                 )
-                                                .stroke(.black, lineWidth: 2)
+                                                .stroke(.black, lineWidth: 1)
                                             )
                                     )
                                     .background(
                                         ZStack {
-                                            RoundedRectangle(cornerRadius: 15)
+                                            RoundedRectangle(cornerRadius: 10)
                                                 .fill(.black)
                                         }
                                         // The magic offsets:
-                                        .offset(x: 0, y: 4)  // Slightly right, heavily down
+                                        .offset(x: 0, y: 2)  // Slightly right, heavily down
                                         .scaleEffect(x: 0.99, y: 1.0)
                                     )
                                     Text("- OR -")
@@ -265,23 +265,23 @@ struct HomeView: View {
 
                                     .background(
                                         // --- Top Layer: The button itself ---
-                                        RoundedRectangle(cornerRadius: 15)
+                                        RoundedRectangle(cornerRadius: 10)
                                             .fill(.blueButtonTheme)
                                             .overlay(
                                                 // Add the thin black border
                                                 RoundedRectangle(
-                                                    cornerRadius: 15
+                                                    cornerRadius: 10
                                                 )
-                                                .stroke(.black, lineWidth: 2)
+                                                .stroke(.black, lineWidth: 1)
                                             )
                                     )
                                     .background(
                                         ZStack {
-                                            RoundedRectangle(cornerRadius: 15)
+                                            RoundedRectangle(cornerRadius: 10)
                                                 .fill(.black)
                                         }
                                         // The magic offsets:
-                                        .offset(x: 0, y: 4)  // Slightly right, heavily down
+                                        .offset(x: 0, y: 2)  // Slightly right, heavily down
                                         .scaleEffect(x: 0.99, y: 1.0)
                                     )
                                     Spacer()
@@ -301,7 +301,7 @@ struct HomeView: View {
                                                     size: 30
                                                 )
                                             )
-                                            .foregroundStyle(.yellowTheme)
+                                            .foregroundStyle(.black)
                                         Spacer()
                                     }
                                     HStack {
@@ -345,28 +345,28 @@ struct HomeView: View {
                                         }
                                         .background(
                                             // --- Top Layer: The button itself ---
-                                            RoundedRectangle(cornerRadius: 15)
+                                            RoundedRectangle(cornerRadius: 10)
                                                 .fill(.blueButtonTheme)
                                                 .overlay(
                                                     // Add the thin black border
                                                     RoundedRectangle(
-                                                        cornerRadius: 15
+                                                        cornerRadius: 10
                                                     )
                                                     .stroke(
                                                         .black,
-                                                        lineWidth: 2
+                                                        lineWidth: 1
                                                     )
                                                 )
                                         )
                                         .background(
                                             ZStack {
                                                 RoundedRectangle(
-                                                    cornerRadius: 15
+                                                    cornerRadius: 10
                                                 )
                                                 .fill(.black)
                                             }
                                             // The magic offsets:
-                                            .offset(x: 0, y: 4)  // Slightly right, heavily down
+                                            .offset(x: 0, y: 2)  // Slightly right, heavily down
                                             .scaleEffect(x: 0.99, y: 1.0)
                                         )
                                         .padding(.top, 10)
@@ -386,11 +386,11 @@ struct HomeView: View {
                         .background(
                             // --- Top Layer: The button itself ---
                             RoundedRectangle(cornerRadius: 20)
-                                .fill(.grayTheme)
+                                .fill(.backgroundTheme)
                                 .overlay(
                                     // Add the thin black border
                                     RoundedRectangle(cornerRadius: 20)
-                                        .stroke(.black, lineWidth: 2)
+                                        .stroke(.black, lineWidth: 1)
                                 )
                         )
                         .background(
@@ -399,7 +399,7 @@ struct HomeView: View {
                                     .fill(.black)
                             }
                             // The magic offsets:
-                            .offset(x: 0, y: 4)  // Slightly right, heavily down
+                            .offset(x: 0, y: 2)  // Slightly right, heavily down
                             .scaleEffect(x: 0.99, y: 1.0)
                         )
 
@@ -688,7 +688,7 @@ struct HomeView: View {
                                     .overlay(
                                         // Add the thin black border
                                         RoundedRectangle(cornerRadius: 20)
-                                            .stroke(.black, lineWidth: 2)
+                                            .stroke(.black, lineWidth: 1)
                                     )
                             )
                             .background(
@@ -697,7 +697,7 @@ struct HomeView: View {
                                         .fill(.black)
                                 }
                                 // The magic offsets:
-                                .offset(x: 0, y: 6)  // Slightly right, heavily down
+                                .offset(x: 0, y: 2)  // Slightly right, heavily down
                                 .scaleEffect(x: 1.0, y: 1.0)
                             )
                             

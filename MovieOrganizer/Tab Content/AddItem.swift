@@ -249,7 +249,7 @@ struct AddItem: View {
                                                     RoundedRectangle(
                                                         cornerRadius: 15
                                                     )
-                                                    .stroke(.black, lineWidth: 2)
+                                                    .stroke(.black, lineWidth: 1)
                                                 )
                                         )
                                         .background(
@@ -258,7 +258,7 @@ struct AddItem: View {
                                                     .fill(.black)
                                             }
                                             // The magic offsets:
-                                            .offset(x: 0, y: 4)  // Slightly right, heavily down
+                                            .offset(x: 0, y: 2)  // Slightly right, heavily down
                                             .scaleEffect(x: 0.99, y: 1.0)
                                         )
                                         .padding(.vertical, 20)
@@ -357,7 +357,7 @@ struct AddItem: View {
                                     RoundedRectangle(
                                         cornerRadius: 15
                                     )
-                                    .stroke(.black, lineWidth: 2)
+                                    .stroke(.black, lineWidth: 1)
                                 )
                         )
                         .background(
@@ -366,7 +366,7 @@ struct AddItem: View {
                                     .fill(.black)
                             }
                             // The magic offsets:
-                            .offset(x: 0, y: 4)  // Slightly right, heavily down
+                            .offset(x: 0, y: 2)  // Slightly right, heavily down
                             .scaleEffect(x: 0.99, y: 1.0)
                         )
                         .padding(.top, 40)
@@ -452,7 +452,7 @@ struct AddItem: View {
                                     RoundedRectangle(
                                         cornerRadius: 15
                                     )
-                                    .stroke(.black, lineWidth: 2)
+                                    .stroke(.black, lineWidth: 1)
                                 )
                         )
                         .background(
@@ -461,7 +461,7 @@ struct AddItem: View {
                                     .fill(.black)
                             }
                             // The magic offsets:
-                            .offset(x: 0, y: 4)  // Slightly right, heavily down
+                            .offset(x: 0, y: 2)  // Slightly right, heavily down
                             .scaleEffect(x: 0.99, y: 1.0)
                         )
                         .padding(.top, 30)
@@ -569,7 +569,7 @@ struct AddItem: View {
                                     RoundedRectangle(
                                         cornerRadius: 15
                                     )
-                                    .stroke(.black, lineWidth: 2)
+                                    .stroke(.black, lineWidth: 1)
                                 )
                         )
                         .background(
@@ -578,7 +578,7 @@ struct AddItem: View {
                                     .fill(.black)
                             }
                             // The magic offsets:
-                            .offset(x: 0, y: 4)  // Slightly right, heavily down
+                            .offset(x: 0, y: 2)  // Slightly right, heavily down
                             .scaleEffect(x: 0.99, y: 1.0)
                         )
                         .padding(.top, 30)
