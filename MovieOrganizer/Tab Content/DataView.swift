@@ -122,7 +122,7 @@ struct DataView: View {
                             .overlay(
                                 // Add the thin black border
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(.black, lineWidth: 3)
+                                    .stroke(.black, lineWidth: 1)
                             )
                     )
                     .background(
@@ -130,8 +130,8 @@ struct DataView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(.black)
                         }
-                            .offset(x: 0, y: 5)
-                            .scaleEffect(x: 1.0, y: 1.0)
+                            .offset(x: 0, y: 3)
+                            .scaleEffect(x: 0.99, y: 1.0)
                     )
                     
                     VStack {
@@ -244,7 +244,7 @@ struct DataView: View {
                             .overlay(
                                 // Add the thin black border
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(.black, lineWidth: 8)
+                                    .stroke(.black, lineWidth: 2)
                             )
                     )
                     .background(
@@ -253,7 +253,7 @@ struct DataView: View {
                                 .fill(.black)
                         }
                         // The magic offsets:
-                            .offset(x: 0, y: 6)  // Slightly right, heavily down
+                            .offset(x: 0, y: 3)  // Slightly right, heavily down
                             .scaleEffect(x: 0.99, y: 1.0)
                     )
                     .padding(.top, 10)

@@ -205,7 +205,7 @@ struct SettingsView: View {
                         .overlay(
                             // Add the thin black border
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(.black, lineWidth: 2)
+                                .stroke(.black, lineWidth: 1)
                         )
                 )
                 .background(
@@ -214,7 +214,7 @@ struct SettingsView: View {
                             .fill(.black)
                     }
                     // The magic offsets:
-                    .offset(x: 0, y: 6)  // Slightly right, heavily down
+                        .offset(x: 0, y: 2)  // Slightly right, heavily down
                     .scaleEffect(x: 1.0, y: 1.0)
                 )
 
@@ -442,7 +442,7 @@ struct SettingsView: View {
                         .overlay(
                             // Add the thin black border
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(.black, lineWidth: 2)
+                                .stroke(.black, lineWidth: 1)
                         )
                 )
                 .background(
@@ -450,7 +450,7 @@ struct SettingsView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(.black)
                     }
-                    .offset(x: 0, y: 6)
+                    .offset(x: 0, y: 2)
                     .scaleEffect(x: 1.0, y: 1.0)
                 )
                 .padding(.top, 10)
@@ -481,7 +481,7 @@ struct SettingsView: View {
                 .overlay(
                     // Add the thin black border
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(.black, lineWidth: 2)
+                        .stroke(.black, lineWidth: 1)
                 )
         )
         .background(
@@ -489,7 +489,7 @@ struct SettingsView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.black)
             }
-                .offset(x: 0, y: 4)
+                .offset(x: 0, y: 2)
                 .scaleEffect(x: 0.99, y: 1.0)
         )
         .onAppear {

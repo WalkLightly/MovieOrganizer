@@ -142,7 +142,7 @@ struct MovieListView: View {
                 .overlay(
                     // Add the thin black border
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(.black, lineWidth: 3)
+                        .stroke(.black, lineWidth: 1)
                 )
         )
         .background(
@@ -151,7 +151,7 @@ struct MovieListView: View {
                     .fill(.black)
             }
             // The magic offsets:
-                .offset(x: 0, y: 4)  // Slightly right, heavily down
+                .offset(x: 0, y: 2)  // Slightly right, heavily down
                 .scaleEffect(x: 0.99, y: 1.0)
         )
         //.padding(5)

@@ -553,7 +553,7 @@ struct HomeView: View {
                                 .overlay(
                                     // Add the thin black border
                                     RoundedRectangle(cornerRadius: 20)
-                                        .stroke(.black, lineWidth: 2)
+                                        .stroke(.black, lineWidth: 1)
                                 )
                         )
                         .background(
@@ -562,7 +562,7 @@ struct HomeView: View {
                                     .fill(.black)
                             }
                             // The magic offsets:
-                            .offset(x: 0, y: 6)  // Slightly right, heavily down
+                            .offset(x: 0, y: 2)  // Slightly right, heavily down
                             .scaleEffect(x: 1.0, y: 1.0)
                         )
                         VStack {
@@ -594,7 +594,7 @@ struct HomeView: View {
                                 .fill(.blueTheme)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 30)
-                                        .stroke(.black, lineWidth: 2)
+                                        .stroke(.black, lineWidth: 1)
                                 )
                         )
                         .background(
@@ -603,7 +603,7 @@ struct HomeView: View {
                                     .fill(.black)
                             }
                             // The magic offsets:
-                            .offset(x: 0, y: 4)  // Slightly right, heavily down
+                            .offset(x: 0, y: 1)  // Slightly right, heavily down
                                 .scaleEffect(x: 0.99, y: 1.0)
                         )
                     }
@@ -630,7 +630,7 @@ struct HomeView: View {
                                             .fill(.black)
                                     }
                                     // The magic offsets:
-                                        .offset(x: 0, y: 3)  // Slightly right, heavily down
+                                        .offset(x: 0, y: 1)  // Slightly right, heavily down
                                         .scaleEffect(x: 1.0, y: 1.0)
                                 )
                             Image(systemName: getIcon())

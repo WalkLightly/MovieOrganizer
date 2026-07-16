@@ -90,7 +90,7 @@ struct ExplorerView: View {
                     .overlay(
                         // Add the thin black border
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(.black, lineWidth: 2)
+                            .stroke(.black, lineWidth: 1)
                     )
             )
             .background(
@@ -98,7 +98,7 @@ struct ExplorerView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(.black)
                 }
-                    .offset(x: 0, y: 4)
+                    .offset(x: 0, y: 2)
                     .scaleEffect(x: 0.99, y: 1.0)
             )
             ScrollView {
@@ -167,7 +167,7 @@ struct ExplorerView: View {
                 .overlay(
                     // Add the thin black border
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(.black, lineWidth: 2)
+                        .stroke(.black, lineWidth: 1)
                 )
         )
         .background(
@@ -175,7 +175,7 @@ struct ExplorerView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.black)
             }
-                .offset(x: 0, y: 4)
+                .offset(x: 0, y: 2)
                 .scaleEffect(x: 0.99, y: 1.0)
         )
         .onAppear {
