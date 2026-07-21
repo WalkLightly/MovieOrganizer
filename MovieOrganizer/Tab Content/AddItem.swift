@@ -29,14 +29,6 @@ struct AddItem: View {
     @State private var type: String = "DVD"
     @FocusState private var isTextFieldFocused: Bool
     
-    func showButton() -> Bool {
-        
-        return movieGenres.count > 0
-            && movieFolder != ""
-            && movieName != ""
-            && location != ""
-    }
-    
     var body: some View {
         ZStack {
             VStack {
@@ -60,7 +52,7 @@ struct AddItem: View {
                                         size: 25
                                     )
                                 )
-                            TextField("", text: $movieName)
+                            TextField("", text: $movieName, axis: .vertical)
                                 .containerRelativeFrame(.horizontal) { length, axis in
                                     return length * 0.78
                                 }
@@ -351,7 +343,7 @@ struct AddItem: View {
                         .background(
                             // --- Top Layer: The button itself ---
                             RoundedRectangle(cornerRadius: 15)
-                                .fill(showButton() ? .blueButtonTheme : .gray)
+                                .fill(.blueButtonTheme)
                                 .overlay(
                                     // Add the thin black border
                                     RoundedRectangle(
@@ -369,9 +361,7 @@ struct AddItem: View {
                             .offset(x: 0, y: 2)  // Slightly right, heavily down
                             .scaleEffect(x: 0.99, y: 1.0)
                         )
-                        .padding(.top, 40)
-                        .disabled(!showButton())
-                        
+                        .padding(.top, 40)                        
                     }
                     .containerRelativeFrame(.horizontal) { length, axis in
                         return length * 0.9

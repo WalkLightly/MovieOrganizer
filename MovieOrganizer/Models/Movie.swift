@@ -10,12 +10,12 @@ var m = Movie(id: "1", isCableRecording: false, name: "Test 1", genres: ["Fantas
 var m2 = Movie(id: "2", isCableRecording: false, name: "Test 1", genres: ["Fantasy", "Comedy"], folder: "H", location: "12", type: "DVD")
 
 struct Movie {
-    let id: String
-    let isCableRecording: Bool
-    let name: String
-    let genres: [String]
-    let folder: String
-    let location: String
-    let type: String
+    var id: String
+    var isCableRecording: Bool
+    var name: String
+    var genres: [String]
+    var folder: String
+    var location: String
+    var type: String
 }
 

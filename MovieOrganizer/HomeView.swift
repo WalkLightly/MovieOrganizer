@@ -33,8 +33,8 @@ struct HomeView: View {
                 return "house"
             case "search":
                 return "magnifyingglass"
-            case "chart":
-                return "chart.bar.yaxis"
+            case "file":
+                return "arrow.up.arrow.down"
             case "history":
                 return "clock.arrow.trianglehead.clockwise.rotate.90.path.dotted"
             case "settings":
@@ -177,6 +177,8 @@ struct HomeView: View {
                         ExplorerView()
                     } else if tab == "newItem" {
                         AddItem(chosenItem: $newItem)
+                    } else if tab == "file" {
+                        ImportExportView()
                     }
                     Spacer()
                 }
@@ -464,16 +466,16 @@ struct HomeView: View {
                                 withAnimation(
                                     .smooth(duration: 0.3, extraBounce: 0.3)
                                 ) {
-                                    tab = "chart"
+                                    tab = "file"
                                     xOffset = -29
                                 }
                             }) {
-                                if tab == "chart" {
-                                    Image(systemName: "chart.bar.yaxis")
+                                if tab == "file" {
+                                    Image(systemName: "arrow.up.arrow.down")
                                         .font(.system(size: 20))
                                         .foregroundStyle(.yellowTheme)
                                 } else {
-                                    Image(systemName: "chart.bar.yaxis")
+                                    Image(systemName: "arrow.up.arrow.down")
                                         .font(.system(size: 20))
                                         .foregroundStyle(.white)
                                 }

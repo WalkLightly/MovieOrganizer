@@ -10,9 +10,13 @@ import SwiftUI
 @MainActor
 struct MovieListView: View {
     @StateObject private var viewModel = MovieListViewModel()
-    @State private var isShowingSheet: Bool = true
+    @State private var isShowingSheet: Bool = false
+    @State private var showEditSheet: Bool = false
     @State var searchString: String = ""
+    @State var selectedMovie: Movie = Movie(id: "f", isCableRecording: false, name: "", genres: [], folder: "", location: "", type: "")
+    
     @FocusState private var isTextFieldFocused: Bool
+    
 
 
     func getMovieCountWithFilter() -> Int {
@@ -109,6 +113,10 @@ struct MovieListView: View {
                                 .listRowSeparator(.hidden)
                                 .listRowInsets(EdgeInsets())
                                 .padding(.bottom, 10)
+                                .onTapGesture {
+                                    selectedMovie = movie
+                                    showEditSheet = true
+                                }
 
                         }
                     }
@@ -156,6 +164,10 @@ struct MovieListView: View {
         )
         //.padding(5)
         .padding(.top, isTextFieldFocused ? 80 : 0)
+        .sheet(isPresented: $showEditSheet)
+        {
+            EditMovieSheet(selectedMovie: $selectedMovie, showSheet: $showEditSheet);
+        }
         .onAppear {
             isShowingSheet = false
         }
