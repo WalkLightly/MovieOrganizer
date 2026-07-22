@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AddItem: View {
     
+    @StateObject private var viewModel = NewItemViewModel()
+    
     @Binding var chosenItem: String
     @State private var formColor: Color = .seafoamBlue
     
@@ -52,13 +54,13 @@ struct AddItem: View {
                                         size: 25
                                     )
                                 )
-                            TextField("", text: $movieName, axis: .vertical)
+                            TextField("", text: $movieName)
                                 .containerRelativeFrame(.horizontal) { length, axis in
                                     return length * 0.78
                                 }
                                 .frame(height: 40)
                                 .foregroundStyle(.white)
-                                .font(.custom("PTSans-Narrow", size: 25))
+                                .font(.custom("PTSans-Narrow", size: 20))
                                 .padding(.leading, 5)
                                 .padding(.top, -18)
                                 .focused($isTextFieldFocused)
@@ -172,47 +174,32 @@ struct AddItem: View {
                         }
                         HStack {
                             VStack {
-                                HStack {
-                                    Text("Genres")
-                                        .foregroundStyle(formColor)
-                                        .font(.custom("PTSans-Narrow", size: 25))
-                                    Spacer()
-                                }
-                                HStack {
-                                    TextField("", text: $movieGenre)
-                                        .frame(height: 40)
-                                        .foregroundStyle(.white)
-                                        .font(.custom("PTSans-Narrow", size: 25))
+                                Menu {
+                                    ForEach(viewModel.genres, id: \.self) { genre in
+                                        Button {
+                                            movieGenres.append(genre)
+                                        } label: {
+                                            Text(genre)
+                                        }
+                                    }
+                                } label: {
+                                    HStack {
+                                        Text("Genres")
+                                            .foregroundStyle(formColor)
+                                            .font(.custom("PTSans-Narrow", size: 25))
+                                        VStack {
+                                            Text("Tap to choose genres")
+                                                .foregroundStyle(.blueTheme)
+                                                .font(.custom("PTSans-Narrow", size: 15))
+                                                .padding(.horizontal, 5)
+                                        }
+                                        .background(.white)
+                                        .cornerRadius(5)
+                                    }
                                     
-                                        .padding(.top, -18)
-                                        .containerRelativeFrame(.horizontal) { length, axis in
-                                            return length * 0.5
-                                        }
-                                    Spacer()
-                                }
-                                   // .focused($showGenresAvailable)
-                                HStack {
-                                    Rectangle()
-                                        .fill(formColor)
-                                        .frame(height: 2)
-                                        .containerRelativeFrame(.horizontal) { length, axis in
-                                            return length * 0.5
-                                        }
-                                        .opacity(0.7)
-                                        .offset(y: -5)
-                                    Spacer()
                                 }
                             }
-                            Button {
-                                movieGenres.append(movieGenre)
-                                movieGenre = ""
-                            } label: {
-                                Text("Add")
-                                    .font(.custom("PTSans-Narrow", size: 30))
-                                    .frame(width: 90, height: 40)
-                                    .foregroundColor(movieGenre == "" ? .gray : .yellowTheme)
-                            }
-                            .disabled(movieGenre == "")
+                            Spacer()
 
                         }
                         .containerRelativeFrame(.horizontal) { length, axis in
@@ -236,7 +223,7 @@ struct AddItem: View {
                                         .frame(height: 35)
                                         .background(
                                             RoundedRectangle(cornerRadius: 15)
-                                                .fill(.blueButtonTheme)
+                                                .fill(.blueTheme)
                                                 .overlay(
                                                     RoundedRectangle(
                                                         cornerRadius: 15
@@ -262,31 +249,44 @@ struct AddItem: View {
                         }
                         .padding(.horizontal, 15)
                         HStack (spacing: 50) {
-                            VStack(alignment: .leading) {
-                                Text("Folder")
-                                    .foregroundStyle(formColor)
-                                    .font(
-                                        .custom(
-                                            "PTSans-Narrow",
-                                            size: 25
-                                        )
-                                    )
-                                TextField("", text: $movieFolder)
-                                    .containerRelativeFrame(.horizontal) { length, axis in
-                                        return length * 0.2
+                            VStack (alignment: .leading) {
+                                Menu {
+                                    ForEach(viewModel.folders, id: \.self) { folder in
+                                        Button {
+                                            movieFolder = folder
+                                        } label: {
+                                            Text(folder)
+                                        }
                                     }
-                                    .frame(height: 40)
-                                    .foregroundStyle(.white)
-                                    .font(.custom("PTSans-Narrow", size: 25))
-                                    .padding(.leading, 5)
-                                    .padding(.top, -18)
-                                Rectangle()
-                                    .fill(formColor)
-                                    .frame(height: 2)
-                                    .containerRelativeFrame(.horizontal) { length, axis in
-                                        return length * 0.2
+                                } label: {
+                                    VStack {
+                                        Text("Folder")
+                                            .foregroundStyle(formColor)
+                                            .font(
+                                                .custom(
+                                                    "PTSans-Narrow",
+                                                    size: 25
+                                                )
+                                            )
+                                        Text(movieFolder)
+                                            .containerRelativeFrame(.horizontal) { length, axis in
+                                                return length * 0.2
+                                            }
+                                            .frame(height: 40)
+                                            .foregroundStyle(.white)
+                                            .font(.custom("PTSans-Narrow", size: 25))
+                                            .padding(.leading, 5)
+                                            .padding(.top, -18)
+                                        Rectangle()
+                                            .fill(formColor)
+                                            .frame(height: 2)
+                                            .containerRelativeFrame(.horizontal) { length, axis in
+                                                return length * 0.15
+                                            }
+                                            .offset(y: -5)
                                     }
-                                    .offset(y: -5)
+                                }
+                                .menuOrder(.priority)
                             }
                             VStack(alignment: .leading) {
                                 Text("Spot")
@@ -310,7 +310,7 @@ struct AddItem: View {
                                     .fill(formColor)
                                     .frame(height: 2)
                                     .containerRelativeFrame(.horizontal) { length, axis in
-                                        return length * 0.2
+                                        return length * 0.1
                                     }
                                     .offset(y: -5)
                             }

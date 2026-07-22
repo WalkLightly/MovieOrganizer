@@ -1,20 +1,46 @@
 //
-//  ExplorerAPI.swift
+//  NewItemAPI.swift
 //  MovieOrganizer
 //
-//  Created by Michael Knight on 7/10/26.
+//  Created by Michael Knight on 7/21/26.
 //
 
 import Foundation
 import FirebaseFirestore
 
 
-class ExplorerAPI {
-    static let shared = ExplorerAPI()
+class NewItemAPI {
+    static let shared = NewItemAPI()
     var db = Firestore.firestore()
     
     private init() {
         
+    }
+    
+    func getAllGenres() async throws -> [Genre] {
+        var genres: [Genre] = []
+        
+        do {
+          let querySnapshot = try await db.collection("genres")
+                .order(by: "name", descending: false).getDocuments()
+
+          for document in querySnapshot.documents {
+              let genreData = document.data()
+              
+              let genre = Genre(
+                            id: document.documentID,
+                            name: genreData["name"] as? String ?? "",
+                            abbreviation: genreData["abbreviation"] as? String ?? "",
+                            movies: genreData["movies"] as? [String] ?? []
+                        )
+              
+              genres.append(genre)
+          }
+        } catch {
+          print("Error getting genres: \(error)")
+        }
+        
+        return genres
     }
     
     func getAllFolders() async throws -> [Folder] {
@@ -66,4 +92,12 @@ class ExplorerAPI {
 
         return folderMovies
     }
+    
+    
+    
+    /***********************************************************
+     These methods will need to udpate other methods
+     ***********************************************************/
+    
+
 }

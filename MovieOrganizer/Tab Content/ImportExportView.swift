@@ -16,7 +16,7 @@ struct ImportExportView: View {
     @State private var data: String = ""
     
     var body: some View {
-        VStack {
+        ScrollView {
             HStack {
                 Text("Import/Export")
                     .font(.custom("Poppins-Bold", size: 35))
@@ -44,6 +44,7 @@ struct ImportExportView: View {
                         return length * 0.85
                     }
                     .background(.blueTheme)
+                    Spacer()
                 }
                 .containerRelativeFrame(.horizontal) { length, axis in
                     return length * 0.9
@@ -157,7 +158,7 @@ struct ImportExportView: View {
                             .padding(.horizontal, 5)
                             .padding(.top, -15)
                             .containerRelativeFrame(.vertical) { length, axis in
-                                return length * 0.1
+                                return length * 0.13
                             }
                             
                     }
@@ -222,73 +223,91 @@ struct ImportExportView: View {
             }
             .frame(height: 100)
             
-            ScrollView {
-                if data != "" {
-                    VStack {
-                        HStack {
-                            VStack {
-                                Text("In Database")
-                                    .font(.custom("Poppins-Bold", size: 20))
-                                    .foregroundStyle(.white)
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 5)
-                            }
-                            .containerRelativeFrame(.horizontal) { length, axis in
-                                return length * 0.45
-                            }
-                            Divider()
-                                .frame(width: 2)
-                            
-                                .overlay(.white)
-                                .padding(.top, -5)
-                            VStack {
-                                Text("From File")
-                                    .font(.custom("Poppins-Bold", size: 20))
-                                    .foregroundStyle(.white)
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 5)
-                            }
-                            .containerRelativeFrame(.horizontal) { length, axis in
-                                return length * 0.45
-                            }
+            if data != "" {
+                VStack {
+                    HStack {
+                        VStack {
+                            Text("In Database")
+                                .font(.custom("Poppins-Bold", size: 20))
+                                .foregroundStyle(.white)
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 5)
                         }
-                        .frame(height: 40)
                         .containerRelativeFrame(.horizontal) { length, axis in
-                            return length * 0.9
+                            return length * 0.45
                         }
                         Divider()
-                            .frame(height: 2)
-                            .overlay(. white)
+                            .frame(width: 2)
+                        
+                            .overlay(.white)
                             .padding(.top, -5)
+                        VStack {
+                            Text("From File")
+                                .font(.custom("Poppins-Bold", size: 20))
+                                .foregroundStyle(.white)
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 5)
+                        }
+                        .containerRelativeFrame(.horizontal) { length, axis in
+                            return length * 0.45
+                        }
                     }
-                } else {
-                    VStack {
-                        Spacer()
-                        Text("Any issues found during importing will show up here")
-                            .font(.custom("Poppins-Bold", size: 20))
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 5)
-                        Spacer()
+                    .frame(height: 40)
+                    .containerRelativeFrame(.horizontal) { length, axis in
+                        return length * 0.9
                     }
-                    .containerRelativeFrame(.vertical) { length, axis in
-                        return length * 0.5
+                    Divider()
+                        .frame(height: 2)
+                        .overlay(. white)
+                        .padding(.top, -5)
+                    ScrollView {
+                        VStack {
+                        }
                     }
+                   
                 }
+                .containerRelativeFrame(.vertical) { length, axis in
+                    return length * 0.65
+                }
+                .containerRelativeFrame(.horizontal) { length, axis in
+                    return length * 0.9
+                }
+                .background(.blueButtonTheme)
+                .cornerRadius(10)
+                .shadow(
+                    color: .white.opacity(0.9),
+                    radius: 4,
+                    x: 0,
+                    y: 0
+                )
             }
-            .containerRelativeFrame(.horizontal) { length, axis in
-                return length * 0.9
+            else {
+                VStack {
+                    Spacer()
+                    Text("Any issues found during importing will show up here")
+                        .font(.custom("Poppins-Bold", size: 20))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                    Spacer()
+                }
+                .containerRelativeFrame(.vertical) { length, axis in
+                    return length * 0.47
+                }
+                .containerRelativeFrame(.horizontal) { length, axis in
+                    return length * 0.9
+                }
+                .background(.blueButtonTheme)
+                .cornerRadius(10)
+                .shadow(
+                    color: .white.opacity(0.9),
+                    radius: 4,
+                    x: 0,
+                    y: 0
+                )
             }
-            .background(.blueButtonTheme)
-            .cornerRadius(10)
-            .shadow(
-                color: .white.opacity(0.9),
-                radius: 4,
-                x: 0,
-                y: 0
-            )
-            Spacer()
             
+            Spacer()
         }
         .cornerRadius(10)
         .containerRelativeFrame(.horizontal) { length, axis in

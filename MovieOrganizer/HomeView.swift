@@ -25,6 +25,12 @@ struct HomeView: View {
     func getSlotOptions() -> [String] {
         return settingsViewModel.genres.map(\.name)
     }
+    
+    func resetValues() -> Void {
+        showShuffle = false
+        showRandomlyChosenMovie = false
+        randomMovie = ""
+    }
 
     func getIcon() -> String {
 
@@ -405,7 +411,7 @@ struct HomeView: View {
                             .scaleEffect(x: 0.99, y: 1.0)
                         )
 
-                        .offset(y: randomGenre != "" ? 0 : 0)
+                        .offset(y: 5)
                     }
                 }
                 Spacer()
@@ -418,6 +424,7 @@ struct HomeView: View {
                                 ) {
                                     tab = "home"
                                     xOffset = -145
+                                    resetValues()
                                 }
                             }) {
                                 if tab == "home" {
@@ -443,6 +450,7 @@ struct HomeView: View {
                                 ) {
                                     tab = "search"
                                     xOffset = -87
+                                    resetValues()
                                 }
                             }) {
                                 if tab == "search" {
@@ -468,6 +476,7 @@ struct HomeView: View {
                                 ) {
                                     tab = "file"
                                     xOffset = -29
+                                    resetValues()
                                 }
                             }) {
                                 if tab == "file" {
@@ -493,6 +502,7 @@ struct HomeView: View {
                                 ) {
                                     tab = "history"
                                     xOffset = 29
+                                    resetValues()
                                 }
                             }) {
                                 if tab == "history" {
@@ -524,6 +534,7 @@ struct HomeView: View {
                                 ) {
                                     tab = "settings"
                                     xOffset = 87
+                                    resetValues()
                                 }
                             }) {
                                 if tab == "settings" {
