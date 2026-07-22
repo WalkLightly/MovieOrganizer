@@ -9,6 +9,8 @@ import SwiftUI
 
 struct EditMovieSheet: View {
     
+    @StateObject private var viewModel = NewItemViewModel()
+    
     @Binding var selectedMovie: Movie
     @Binding var showSheet: Bool
     
@@ -27,14 +29,13 @@ struct EditMovieSheet: View {
                             size: 25
                         )
                     )
-                TextField("", text: $selectedMovie.name, axis: .vertical)
-                    .lineLimit(3, reservesSpace: true)
+                TextField("", text: $selectedMovie.name)
                     .containerRelativeFrame(.horizontal) { length, axis in
                         return length * 0.78
                     }
                     .frame(height: 40)
                     .foregroundStyle(.white)
-                    .font(.custom("PTSans-Narrow", size: 25))
+                    .font(.custom("PTSans-Narrow", size: 20))
                     .padding(.leading, 5)
                     .padding(.top, 5)
                     .focused($isTextFieldFocused)
@@ -47,6 +48,8 @@ struct EditMovieSheet: View {
                     }
                     .offset(y: -5)
             }
+            .padding(.top, isTextFieldFocused ? 100 : 0)
+
             HStack {
                 Text("Type:")
                     .font(
@@ -148,47 +151,32 @@ struct EditMovieSheet: View {
             }
             HStack {
                 VStack {
-                    HStack {
-                        Text("Genres")
-                            .foregroundStyle(formColor)
-                            .font(.custom("PTSans-Narrow", size: 25))
-                        Spacer()
-                    }
-                    HStack {
-                        TextField("", text: $newGenre)
-                            .frame(height: 40)
-                            .foregroundStyle(.white)
-                            .font(.custom("PTSans-Narrow", size: 25))
+                    Menu {
+                        ForEach(viewModel.genres, id: \.self) { genre in
+                            Button {
+                                selectedMovie.genres.append(genre)
+                            } label: {
+                                Text(genre)
+                            }
+                        }
+                    } label: {
+                        HStack {
+                            Text("Genres")
+                                .foregroundStyle(formColor)
+                                .font(.custom("PTSans-Narrow", size: 25))
+                            VStack {
+                                Text("Tap to choose genres")
+                                    .foregroundStyle(.blueTheme)
+                                    .font(.custom("PTSans-Narrow", size: 15))
+                                    .padding(.horizontal, 5)
+                            }
+                            .background(.white)
+                            .cornerRadius(5)
+                        }
                         
-                            .padding(.top, -18)
-                            .containerRelativeFrame(.horizontal) { length, axis in
-                                return length * 0.5
-                            }
-                        Spacer()
-                    }
-                       // .focused($showGenresAvailable)
-                    HStack {
-                        Rectangle()
-                            .fill(formColor)
-                            .frame(height: 2)
-                            .containerRelativeFrame(.horizontal) { length, axis in
-                                return length * 0.5
-                            }
-                            .opacity(0.7)
-                            .offset(y: -5)
-                        Spacer()
                     }
                 }
-                Button {
-                    selectedMovie.genres.append(newGenre)
-                    newGenre = ""
-                } label: {
-                    Text("Add")
-                        .font(.custom("PTSans-Narrow", size: 30))
-                        .frame(width: 90, height: 40)
-                        .foregroundColor(newGenre == "" ? .gray : .yellowTheme)
-                }
-                .disabled(newGenre == "")
+                Spacer()
 
             }
             .containerRelativeFrame(.horizontal) { length, axis in
@@ -238,31 +226,44 @@ struct EditMovieSheet: View {
             }
             .padding(.horizontal, 15)
             HStack (spacing: 50) {
-                VStack(alignment: .leading) {
-                    Text("Folder")
-                        .foregroundStyle(formColor)
-                        .font(
-                            .custom(
-                                "PTSans-Narrow",
-                                size: 25
-                            )
-                        )
-                    TextField("", text: $selectedMovie.folder)
-                        .containerRelativeFrame(.horizontal) { length, axis in
-                            return length * 0.2
+                VStack (alignment: .leading) {
+                    Menu {
+                        ForEach(viewModel.folders, id: \.self) { folder in
+                            Button {
+                                selectedMovie.folder = folder
+                            } label: {
+                                Text(folder)
+                            }
                         }
-                        .frame(height: 40)
-                        .foregroundStyle(.white)
-                        .font(.custom("PTSans-Narrow", size: 25))
-                        .padding(.leading, 5)
-                        .padding(.top, -18)
-                    Rectangle()
-                        .fill(formColor)
-                        .frame(height: 2)
-                        .containerRelativeFrame(.horizontal) { length, axis in
-                            return length * 0.2
+                    } label: {
+                        VStack {
+                            Text("Folder")
+                                .foregroundStyle(formColor)
+                                .font(
+                                    .custom(
+                                        "PTSans-Narrow",
+                                        size: 25
+                                    )
+                                )
+                            Text(selectedMovie.folder)
+                                .containerRelativeFrame(.horizontal) { length, axis in
+                                    return length * 0.2
+                                }
+                                .frame(height: 40)
+                                .foregroundStyle(.white)
+                                .font(.custom("PTSans-Narrow", size: 25))
+                                .padding(.leading, 5)
+                                .padding(.top, -18)
+                            Rectangle()
+                                .fill(formColor)
+                                .frame(height: 2)
+                                .containerRelativeFrame(.horizontal) { length, axis in
+                                    return length * 0.12
+                                }
+                                .offset(y: -5)
                         }
-                        .offset(y: -5)
+                    }
+                    .menuOrder(.priority)
                 }
                 VStack(alignment: .leading) {
                     Text("Spot")
@@ -286,7 +287,7 @@ struct EditMovieSheet: View {
                         .fill(formColor)
                         .frame(height: 2)
                         .containerRelativeFrame(.horizontal) { length, axis in
-                            return length * 0.2
+                            return length * 0.1
                         }
                         .offset(y: -5)
                 }
@@ -298,7 +299,7 @@ struct EditMovieSheet: View {
 
             Button {
             } label: {
-                Text("Add Movie")
+                Text("Update Movie")
                     .font(
                         .custom(
                             "PTSans-Narrow",
